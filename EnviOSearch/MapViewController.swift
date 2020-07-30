@@ -68,10 +68,20 @@ class MapViewController: UIViewController {
     }
     
     @IBAction func moreInfoClicked(_ sender: Any) {
-        
+        performSegue(withIdentifier: "facSegue", sender: self)
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "facSegue" :
+            let vc = segue.destination as! FacViewController
+            vc.facID = facID
+            
+        default:
+            break
+        }
+        
+    }
     
     private func configureLocationServices() {
         locationManager.delegate = self
