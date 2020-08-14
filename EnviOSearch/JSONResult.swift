@@ -8,13 +8,16 @@
 
 import Foundation
 
+// FOR MAPS
 struct ResultSet: Decodable {
     let Results: Results
 }
 
 struct Results: Decodable {
-    let QueryRows: String
+    let QueryRows: String?
     let Facilities: [Facility]?
+    let EnforcementComplianceSummaries: EnforcementComplianceSummaries?
+    let Permits: [Permits]?
 }
 
 struct Facility: Decodable {
@@ -28,4 +31,32 @@ struct Facility: Decodable {
     let FacLong: String
     let FacQtrsWithNC: String?
     
+}
+
+// FOR FACILITY
+
+struct EnforcementComplianceSummaries: Decodable {
+    let Summaries: [Summaries]
+}
+
+struct Summaries: Decodable {
+    let Statute: String
+    let Inspections: String?
+    let LastInspection: String?
+    let CurrentStatus: String?
+    let QtrsInNC: String?
+    let QtrsInSNC: String?
+    let InformalActions: String?
+    let FormalActions: String?
+    let Cases: String?
+    let TotalPenalties: String?
+    let TotalCasePenalties: String?
+}
+
+struct Permits: Decodable {
+    let FacilityName: String
+    let FacilityStreet: String
+    let FacilityCity: String
+    let FacilityState: String
+    let FacilityZip: String
 }
