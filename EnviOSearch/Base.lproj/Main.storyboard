@@ -171,36 +171,61 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3j-NM-Vhu">
-                                <rect key="frame" x="0.0" y="0.0" width="434" height="736"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <mapView multipleTouchEnabled="YES" contentMode="scaleAspectFill" mapType="standard" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3j-NM-Vhu">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g04-nN-gsf">
-                                <rect key="frame" x="329" y="686" width="65" height="30"/>
-                                <state key="normal" title="More Info"/>
-                                <connections>
-                                    <action selector="moreInfoClicked:" destination="cpC-Bb-cVk" eventType="touchUpInside" id="ZVb-Po-fBX"/>
-                                    <segue destination="VJs-0S-K2l" kind="presentation" identifier="facSegue" id="8zq-75-hOz"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WS8-OG-6kR">
-                                <rect key="frame" x="20" y="686" width="58" height="30"/>
-                                <state key="normal" title="Go Back"/>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="wWP-3D-cDV"/>
-                                </connections>
-                            </button>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="legend" translatesAutoresizingMaskIntoConstraints="NO" id="3k9-WL-xYT">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="154"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="154" id="NR8-9o-Dvn"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="kT6-Qv-Xz0">
+                                <rect key="frame" x="20" y="686" width="374" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WS8-OG-6kR">
+                                        <rect key="frame" x="0.0" y="0.0" width="124.66666666666667" height="30"/>
+                                        <state key="normal" title="Go Back"/>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="wWP-3D-cDV"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g04-nN-gsf">
+                                        <rect key="frame" x="124.66666666666666" y="0.0" width="124.66666666666666" height="30"/>
+                                        <state key="normal" title="More Info"/>
+                                        <connections>
+                                            <action selector="moreInfoClicked:" destination="cpC-Bb-cVk" eventType="touchUpInside" id="ZVb-Po-fBX"/>
+                                            <segue destination="VJs-0S-K2l" kind="presentation" identifier="facSegue" id="8zq-75-hOz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fVs-zq-hf6">
+                                        <rect key="frame" x="249.33333333333329" y="0.0" width="124.66666666666666" height="30"/>
+                                        <state key="normal" title="Show Legend"/>
+                                        <connections>
+                                            <action selector="legendButtonClicked:" destination="cpC-Bb-cVk" eventType="touchUpInside" id="Ufa-Sr-Nkk"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="WS8-OG-6kR" firstAttribute="leading" secondItem="3UR-cq-iHO" secondAttribute="leading" constant="20" id="5x5-vd-gKr"/>
-                            <constraint firstItem="3UR-cq-iHO" firstAttribute="bottom" secondItem="g04-nN-gsf" secondAttribute="bottom" constant="20" id="9yc-bv-5YE"/>
-                            <constraint firstItem="3UR-cq-iHO" firstAttribute="trailing" secondItem="g04-nN-gsf" secondAttribute="trailing" constant="20" id="Jb8-6C-BQb"/>
-                            <constraint firstItem="3UR-cq-iHO" firstAttribute="bottom" secondItem="WS8-OG-6kR" secondAttribute="bottom" constant="20" id="nxu-fb-6jD"/>
+                            <constraint firstAttribute="trailing" secondItem="l3j-NM-Vhu" secondAttribute="trailing" id="F1F-Hy-pUW"/>
+                            <constraint firstItem="l3j-NM-Vhu" firstAttribute="leading" secondItem="sr7-wV-T4T" secondAttribute="leading" id="RaP-g9-Lj3"/>
+                            <constraint firstItem="3UR-cq-iHO" firstAttribute="trailing" secondItem="kT6-Qv-Xz0" secondAttribute="trailing" constant="20" id="dnJ-1h-hNj"/>
+                            <constraint firstItem="3k9-WL-xYT" firstAttribute="trailing" secondItem="3UR-cq-iHO" secondAttribute="trailing" id="fy4-jc-bc1"/>
+                            <constraint firstItem="l3j-NM-Vhu" firstAttribute="top" secondItem="sr7-wV-T4T" secondAttribute="top" id="nbL-3I-R2c"/>
+                            <constraint firstItem="3UR-cq-iHO" firstAttribute="bottom" secondItem="kT6-Qv-Xz0" secondAttribute="bottom" constant="20" id="puZ-4x-HCa"/>
+                            <constraint firstAttribute="bottom" secondItem="l3j-NM-Vhu" secondAttribute="bottom" id="rHu-zT-TIl"/>
+                            <constraint firstItem="3k9-WL-xYT" firstAttribute="leading" secondItem="3UR-cq-iHO" secondAttribute="leading" id="snO-Uh-paB"/>
+                            <constraint firstItem="kT6-Qv-Xz0" firstAttribute="leading" secondItem="3UR-cq-iHO" secondAttribute="leading" constant="20" id="tki-J8-GjS"/>
+                            <constraint firstItem="3k9-WL-xYT" firstAttribute="top" secondItem="3UR-cq-iHO" secondAttribute="top" id="voe-G5-q70"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3UR-cq-iHO"/>
                     </view>
                     <connections>
+                        <outlet property="legendImage" destination="3k9-WL-xYT" id="vKm-t7-2Sh"/>
+                        <outlet property="legendLabel" destination="fVs-zq-hf6" id="YVy-Xk-dOo"/>
                         <outlet property="mMap" destination="l3j-NM-Vhu" id="6WP-7x-ITp"/>
                         <outlet property="moreInfoButton" destination="g04-nN-gsf" id="Kga-aZ-87F"/>
                     </connections>
@@ -747,6 +772,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="legend" width="988" height="359"/>
         <image name="questionmark.circle.fill" catalog="system" width="128" height="121"/>
     </resources>
 </document>

@@ -18,6 +18,9 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mMap: MKMapView!
     @IBOutlet weak var moreInfoButton: UIButton!
     
+    @IBOutlet weak var legendImage: UIImageView!
+    @IBOutlet weak var legendLabel: UIButton!
+    
     let markerSize = CGSize(width: 20, height: 20)
     
     var CAAClicked = true
@@ -65,6 +68,15 @@ class MapViewController: UIViewController {
         //zoomToLocation(with: currentLocation ?? CLLocationCoordinate2D(latitude: 0,longitude: 0))
         getJSON()
         
+    }
+    
+    @IBAction func legendButtonClicked(_ sender: Any) {
+        switch legendImage.isHidden {
+        case true:
+            legendImage.isHidden = false
+        case false:
+            legendImage.isHidden = true
+        }
     }
     
     @IBAction func moreInfoClicked(_ sender: Any) {

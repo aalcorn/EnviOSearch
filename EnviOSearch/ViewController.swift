@@ -5,9 +5,11 @@
 //  Created by HGS on 7/15/20.
 //  Copyright © 2020 HGS. All rights reserved.
 //
+// App ID: ""
 
 import UIKit
 import MapKit
+import GoogleMobileAds
 
 class ViewController: UIViewController {
     @IBOutlet weak var milesLabel: UILabel!

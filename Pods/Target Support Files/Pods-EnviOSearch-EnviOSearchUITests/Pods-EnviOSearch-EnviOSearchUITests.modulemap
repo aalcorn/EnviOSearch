@@ -1,0 +1,6 @@
+framework module Pods_EnviOSearch_EnviOSearchUITests {
+  umbrella header "Pods-EnviOSearch-EnviOSearchUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
