@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class MoreInfoViewController: UIViewController {
 
@@ -15,11 +16,18 @@ class MoreInfoViewController: UIViewController {
     @IBOutlet weak var CAAButton: UIButton!
     @IBOutlet weak var RCRAButton: UIButton!
     @IBOutlet weak var CWAButton: UIButton!
+    @IBOutlet weak var moreInfoAdview: GADBannerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         CAALabelSettings()
+        
+        moreInfoAdview.delegate = self
+        
+        moreInfoAdview.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        moreInfoAdview.rootViewController = self
+        moreInfoAdview.load(GADRequest())
     }
     
     //Settings for CAALabel. Others are done using storyboard.
@@ -51,3 +59,13 @@ class MoreInfoViewController: UIViewController {
     
 }
 
+extension MoreInfoViewController: GADBannerViewDelegate {
+    
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("Got it")
+    }
+    
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        print(error)
+    }
+}

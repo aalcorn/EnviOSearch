@@ -12,12 +12,15 @@
 
 import UIKit
 import MapKit
+import GoogleMobileAds
+import AVFoundation
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, GADInterstitialDelegate {
     
     @IBOutlet weak var mMap: MKMapView!
     @IBOutlet weak var moreInfoButton: UIButton!
     
+    @IBOutlet weak var loadWheel: UIActivityIndicatorView!
     @IBOutlet weak var legendImage: UIImageView!
     @IBOutlet weak var legendLabel: UIButton!
     
@@ -38,9 +41,16 @@ class MapViewController: UIViewController {
     private let locationManager = CLLocationManager()
     private var currentLocation: CLLocationCoordinate2D?
     
+    var interstitial: GADInterstitial!
+    
+    var audioPlayer: AVAudioPlayer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        let request = GADRequest()
+        interstitial.load(request)
         
         mMap.delegate = self
         
@@ -88,7 +98,9 @@ class MapViewController: UIViewController {
         case "facSegue" :
             let vc = segue.destination as! FacViewController
             vc.facID = facID
-            
+        case "backSegue" :
+            let vc = segue.destination as! ViewController
+            vc.appJustOpened = false
         default:
             break
         }
@@ -143,13 +155,16 @@ class MapViewController: UIViewController {
                         let facNC = Int(facility.FacQtrsWithNC ?? "-1")
                         self.addFacilityToMap(CAA: facility.CAAComplianceStatus ?? "NA", CWA: facility.CWAComplianceStatus ?? "NA", SDWA: facility.SDWAComplianceStatus ?? "NA", RCRA: facility.RCRAComplianceStatus ?? "NA", id: facility.RegistryID, name: facility.FacName, latitude: facLat ?? 80, longitude: facLon ?? -80, NCQtrs: facNC ?? -1)
                     }
+                    
                     DispatchQueue.main.async {
+                        self.loadWheel.isHidden = true
                         self.showToast(message: "Finished")
                     }
                 }
                 else {
                     print("TOO MANY FACILITIES")
                     DispatchQueue.main.async {
+                        self.loadWheel.isHidden = true
                         self.showToast(message: "Too many facilities! Lower radius")
                     }
                 }
@@ -159,6 +174,7 @@ class MapViewController: UIViewController {
             }
         }
         task.resume()
+        
     }
 
     private func addFacilityToMap(CAA: String, CWA: String, SDWA: String, RCRA: String, id: String, name: String, latitude: Double, longitude: Double, NCQtrs: Int) {
@@ -257,6 +273,22 @@ class MapViewController: UIViewController {
         }
     }
     
+    func playSound(soundName: String) {
+        let url = Bundle.main.url(forResource: soundName, withExtension: "mp3")
+        
+        guard url != nil else {
+            return
+        }
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url!)
+            audioPlayer?.play()
+        }
+        catch {
+            print("Error")
+        }
+    }
+    
 }
 
 extension MapViewController: CLLocationManagerDelegate {
@@ -287,45 +319,45 @@ extension MapViewController: MKMapViewDelegate {
         }
         
         if subtitleArray[0] == "High" {
-            if subtitleArray[3] == "A" {
+            switch subtitleArray[3] {
+            case "A":
                 annotationView?.image = UIImage(named: "CAA Red")?.scaleImage(toSize: markerSize)
-            }
-            else if subtitleArray[3] == "W" {
+            case "W":
                 annotationView?.image = UIImage(named: "CWA Red")?.scaleImage(toSize: markerSize)
-            }
-            else if subtitleArray[3] == "R" {
+            case "R" :
                 annotationView?.image = UIImage(named: "RCRA Red")?.scaleImage(toSize: markerSize)
-            }
-            else if subtitleArray[3] == "S" {
+            case "S":
                 annotationView?.image = UIImage(named: "SDWA Red")?.scaleImage(toSize: markerSize)
+            default:
+                print("None Found")
             }
         }
         else if subtitleArray[0] == "Mid" {
-            if subtitleArray[3] == "A" {
+            switch subtitleArray[3] {
+            case "A":
                 annotationView?.image = UIImage(named: "CAA Yellow")?.scaleImage(toSize: markerSize)
-            }
-            else if subtitleArray[3] == "W" {
+            case "W":
                 annotationView?.image = UIImage(named: "CWA Yellow")?.scaleImage(toSize: markerSize)
-            }
-            else if subtitleArray[3] == "R" {
+            case "R" :
                 annotationView?.image = UIImage(named: "RCRA Yellow")?.scaleImage(toSize: markerSize)
-            }
-            else if subtitleArray[3] == "S" {
+            case "S":
                 annotationView?.image = UIImage(named: "SDWA Yellow")?.scaleImage(toSize: markerSize)
+            default:
+                print("None Found")
             }
         }
         else if subtitleArray[0] == "No" {
-            if subtitleArray[3] == "A" {
+            switch subtitleArray[3] {
+            case "A":
                 annotationView?.image = UIImage(named: "CAA Green")?.scaleImage(toSize: markerSize)
-            }
-            else if subtitleArray[3] == "W" {
+            case "W":
                 annotationView?.image = UIImage(named: "CWA Green")?.scaleImage(toSize: markerSize)
-            }
-            else if subtitleArray[3] == "R" {
+            case "R" :
                 annotationView?.image = UIImage(named: "RCRA Green")?.scaleImage(toSize: markerSize)
-            }
-            else if subtitleArray[3] == "S" {
+            case "S":
                 annotationView?.image = UIImage(named: "SDWA Green")?.scaleImage(toSize: markerSize)
+            default:
+                print("None Found")
             }
         }
         else {
@@ -350,6 +382,18 @@ extension MapViewController: MKMapViewDelegate {
             facID = String(subtitleArray[4])
             print(facID ?? "None")
             moreInfoButton.isHidden = false
+            switch subtitleArray[3] {
+            case "A":
+                playSound(soundName: "CAA")
+            case "W":
+                playSound(soundName: "CWA")
+            case "R" :
+                playSound(soundName: "RCRA")
+            case "S":
+                playSound(soundName: "SDWA")
+            default:
+                print("None Found")
+            }
         }
         else {
             facID = nil

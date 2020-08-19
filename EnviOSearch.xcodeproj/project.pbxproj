@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,6 +20,11 @@
 		8FF97A6624C0FAE400D43786 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF97A6524C0FAE400D43786 /* MapViewController.swift */; };
 		8FF97A6824CF627100D43786 /* JSONResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF97A6724CF627100D43786 /* JSONResult.swift */; };
 		8FF97A6A24D3110700D43786 /* FacViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF97A6924D3110700D43786 /* FacViewController.swift */; };
+		8FF97A6E24ED715600D43786 /* CAA.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FF97A6D24ED715500D43786 /* CAA.mp3 */; };
+		8FF97A7024ED716800D43786 /* CWA.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FF97A6F24ED716700D43786 /* CWA.mp3 */; };
+		8FF97A7224ED718400D43786 /* Intro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FF97A7124ED718400D43786 /* Intro.mp3 */; };
+		8FF97A7424ED718E00D43786 /* RCRA.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FF97A7324ED718E00D43786 /* RCRA.mp3 */; };
+		8FF97A7624ED71A400D43786 /* SDWA.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FF97A7524ED71A400D43786 /* SDWA.mp3 */; };
 		9CA8C189F1F167B335ED8F5F /* Pods_EnviOSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD6CC2EC450EA1A09892E07 /* Pods_EnviOSearch.framework */; };
 		C6BA28B1F039279C1E49CB5B /* Pods_EnviOSearchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9911AA8BFDF925AA3E50BE /* Pods_EnviOSearchTests.framework */; };
 /* End PBXBuildFile section */
@@ -65,6 +70,11 @@
 		8FF97A6524C0FAE400D43786 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		8FF97A6724CF627100D43786 /* JSONResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONResult.swift; sourceTree = "<group>"; };
 		8FF97A6924D3110700D43786 /* FacViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacViewController.swift; sourceTree = "<group>"; };
+		8FF97A6D24ED715500D43786 /* CAA.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = CAA.mp3; sourceTree = "<group>"; };
+		8FF97A6F24ED716700D43786 /* CWA.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = CWA.mp3; sourceTree = "<group>"; };
+		8FF97A7124ED718400D43786 /* Intro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Intro.mp3; sourceTree = "<group>"; };
+		8FF97A7324ED718E00D43786 /* RCRA.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = RCRA.mp3; sourceTree = "<group>"; };
+		8FF97A7524ED71A400D43786 /* SDWA.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SDWA.mp3; sourceTree = "<group>"; };
 		9D9911AA8BFDF925AA3E50BE /* Pods_EnviOSearchTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnviOSearchTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE3BA356543416FA1A74D0B2 /* Pods-EnviOSearchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnviOSearchTests.debug.xcconfig"; path = "Target Support Files/Pods-EnviOSearchTests/Pods-EnviOSearchTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DFA3B320EB22060338D1ADAA /* Pods-EnviOSearch-EnviOSearchUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnviOSearch-EnviOSearchUITests.release.xcconfig"; path = "Target Support Files/Pods-EnviOSearch-EnviOSearchUITests/Pods-EnviOSearch-EnviOSearchUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -109,7 +119,6 @@
 				BE3BA356543416FA1A74D0B2 /* Pods-EnviOSearchTests.debug.xcconfig */,
 				E6FA99563ED1B04B9B5D6A92 /* Pods-EnviOSearchTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -159,6 +168,11 @@
 				8FF97A3C24BF5BCA00D43786 /* Assets.xcassets */,
 				8FF97A3E24BF5BCA00D43786 /* LaunchScreen.storyboard */,
 				8FF97A4124BF5BCA00D43786 /* Info.plist */,
+				8FF97A6D24ED715500D43786 /* CAA.mp3 */,
+				8FF97A6F24ED716700D43786 /* CWA.mp3 */,
+				8FF97A7324ED718E00D43786 /* RCRA.mp3 */,
+				8FF97A7524ED71A400D43786 /* SDWA.mp3 */,
+				8FF97A7124ED718400D43786 /* Intro.mp3 */,
 			);
 			path = EnviOSearch;
 			sourceTree = "<group>";
@@ -292,7 +306,12 @@
 			files = (
 				8FF97A4024BF5BCA00D43786 /* LaunchScreen.storyboard in Resources */,
 				8FF97A3D24BF5BCA00D43786 /* Assets.xcassets in Resources */,
+				8FF97A7424ED718E00D43786 /* RCRA.mp3 in Resources */,
+				8FF97A6E24ED715600D43786 /* CAA.mp3 in Resources */,
+				8FF97A7224ED718400D43786 /* Intro.mp3 in Resources */,
+				8FF97A7624ED71A400D43786 /* SDWA.mp3 in Resources */,
 				8FF97A3B24BF5BC900D43786 /* Main.storyboard in Resources */,
+				8FF97A7024ED716800D43786 /* CWA.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

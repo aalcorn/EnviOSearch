@@ -8,6 +8,7 @@
 //https://ofmpub.epa.gov/echo/dfr_rest_services.get_dfr?output=JSON&p_id=110000368913
 
 import UIKit
+import GoogleMobileAds
 
 class FacViewController: UIViewController {
     var facID:String?
@@ -33,11 +34,21 @@ class FacViewController: UIViewController {
     
     @IBOutlet weak var EPARegionLabel: UILabel!
     
+    @IBOutlet weak var FacAdView: GADBannerView!
+    
+    
     var summaries: [Summaries]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        FacAdView.delegate = self
+        
+        FacAdView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        FacAdView.rootViewController = self
+        FacAdView.load(GADRequest())
+        
+        
         
         //Get facility's info
         getFacJSON()
@@ -209,4 +220,15 @@ class FacViewController: UIViewController {
         
     }
     
+}
+
+extension FacViewController: GADBannerViewDelegate {
+    
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("Got it")
+    }
+    
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        print(error)
+    }
 }

@@ -6,12 +6,19 @@
 //  Copyright © 2020 HGS. All rights reserved.
 //
 // App ID: ""
+// 
 
 import UIKit
 import MapKit
 import GoogleMobileAds
+import AVFoundation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, GADInterstitialDelegate {
+    
+    @IBOutlet var blurView: UIVisualEffectView!
+    
+    @IBOutlet var popupView: UIView!
+    
     @IBOutlet weak var milesLabel: UILabel!
     
     @IBOutlet weak var milesSlider: UISlider!
@@ -22,6 +29,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var RCRASwitch: UISwitch!
     @IBOutlet weak var onlyNCSwitch: UISwitch!
     
+    @IBOutlet weak var adView: GADBannerView!
+    
     var CAAClicked = true
     var CWAClicked = true
     var SDWAClicked = true
@@ -30,16 +39,82 @@ class ViewController: UIViewController {
     
     var radius:Float = 0.5
     
+    var interstitial: GADInterstitial!
+   
     private let locationManager = CLLocationManager()
     private var currentLocation: CLLocationCoordinate2D?
+    
+    var appJustOpened = true
+    
+    var audioPlayer: AVAudioPlayer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        blurView.bounds = self.view.bounds
+        popupView.bounds = CGRect(x: 0, y: 0, width: self.view.bounds.width * 0.9, height: self.view.bounds.height * 0.4)
+        
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        interstitial.delegate = self
+        let request = GADRequest()
+        interstitial.load(request)
+        
         configureLocationServices()
         locationManager.startUpdatingLocation()
+        adView.delegate = self
         
+        adView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        adView.rootViewController = self
+        adView.load(GADRequest())
         
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+        if launchedBefore {
+            print("Not first launch")
+            //Do nothing
+        }
+        else {
+            print("First launch")
+            //Set to true
+            //UserDefaults.standard.set(true, forKey: "launchedBefore")
+            //Present screen explaining source of information
+            animateIn(desiredView: blurView)
+            animateIn(desiredView: popupView)
+            
+        }
+        
+        if appJustOpened {
+            //Play intro sound
+            print("Just opened")
+            playSound(soundName: "Intro")
+        }
+        else {
+            print("NOT Just opened!")
+            
+        }
+        
+    }
+    
+    func animateIn(desiredView: UIView) {
+        let backgroundView = self.view!
+        
+        backgroundView.addSubview(desiredView)
+        
+        desiredView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        desiredView.alpha = 0
+        desiredView.center = backgroundView.center
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            desiredView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            desiredView.alpha = 1        })
+    }
+    
+    func animateOut(desiredView: UIView) {
+        UIView.animate(withDuration: 0.3, animations: {
+            desiredView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            desiredView.alpha = 0
+        }, completion : { _ in
+            desiredView.removeFromSuperview()
+        })
     }
 
     @IBAction func milesSliderValueChanged(_ sender: Any) {
@@ -54,7 +129,7 @@ class ViewController: UIViewController {
         
     }
     
-    @IBAction func searchPressed(_ sender: Any) {
+    func doMapSegue() {
         CAAClicked = CAASwitch.isOn
         CWAClicked = CWASwitch.isOn
         RCRAClicked = RCRASwitch.isOn
@@ -63,6 +138,17 @@ class ViewController: UIViewController {
         
         performSegue(withIdentifier: "toMapSegue", sender: self)
     }
+    
+    @IBAction func searchPressed(_ sender: Any) {
+        if interstitial.isReady {
+            interstitial.present(fromRootViewController: self)
+        }
+        else {
+            doMapSegue()
+        }
+        
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
@@ -108,6 +194,37 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func okayClicked(_ sender: Any) {
+        animateOut(desiredView: blurView)
+        animateOut(desiredView: popupView)
+    }
+    
+    
+    func interstitialWillDismissScreen(_ ad: GADInterstitial) {
+        print("Will Dismiss Screen")
+    }
+    
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        print("SCREEN DISMISSED")
+        doMapSegue()
+    }
+    
+    func playSound(soundName: String) {
+        let url = Bundle.main.url(forResource: soundName, withExtension: "mp3")
+        
+        guard url != nil else {
+            return
+        }
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url!)
+            audioPlayer?.play()
+        }
+        catch {
+            print("Error")
+        }
+    }
+    
 }
 
 extension ViewController: CLLocationManagerDelegate {
@@ -117,5 +234,16 @@ extension ViewController: CLLocationManagerDelegate {
         }
         
         currentLocation = latestLocation.coordinate
+    }
+}
+
+extension ViewController: GADBannerViewDelegate {
+    
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("Got it")
+    }
+    
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        print(error)
     }
 }
