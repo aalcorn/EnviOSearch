@@ -44,16 +44,19 @@ class FacViewController: UIViewController {
         // Do any additional setup after loading the view.
         FacAdView.delegate = self
         
-        FacAdView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        //FacAdView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        FacAdView.adUnitID = "redacted"
+        //facAd ID: "redacted"
         FacAdView.rootViewController = self
         FacAdView.load(GADRequest())
-        
-        
         
         //Get facility's info
         getFacJSON()
         
     }
+    
+    //When a switch is clicked, disable all other switches and call updateLabels
+    
     @IBAction func CAAPressed(_ sender: Any) {
         CAASwitch.isOn = true
         CWASwitch.isOn = false
@@ -92,13 +95,13 @@ class FacViewController: UIViewController {
         updateLabels(statute: "RCRA")
     }
     
+    //Send user to EPA page about current facility
     @IBAction func MoreInfoClicked(_ sender: Any) {
         let url = URL (string: "https://echo.epa.gov/detailed-facility-report?fid=\(facID ?? "0")")!
         UIApplication.shared.open(url)
-        
     }
     
-    
+    //Get info for facility summary and store it in summaries array
     private func getFacJSON() {
         let myURL = "https://ofmpub.epa.gov/echo/dfr_rest_services.get_dfr?output=JSON&p_id=\(facID ?? "0")"
         print(myURL)
@@ -108,8 +111,6 @@ class FacViewController: UIViewController {
             print("ERROR")
                 return
         }
-        
-        //guard let testurl = URL(string: "https://jsonplaceholder.typicode.com/users") else {return}
         
         let session = URLSession.shared
         let task = session.dataTask(with: url) { (data, _, _) in
@@ -129,6 +130,7 @@ class FacViewController: UIViewController {
                 let facilityState = resultSet.Results.Permits?[0].FacilityState
                 let facilityZip = resultSet.Results.Permits?[0].FacilityZip
                 
+                //Set EPA Region contact information
                 DispatchQueue.main.async {
                     switch facilityState {
                         case "CT", "ME", "MA", "NH", "RI", "VT":
@@ -155,6 +157,7 @@ class FacViewController: UIViewController {
                             self.EPARegionLabel.text = "EPA Region: Not found"
                     }
                 
+                    //Set information about facility location
                     self.FacilityNameLabel.text = resultSet.Results.Permits?[0].FacilityName
                     self.FacilityStreetCityLabel.text = "\(facilityStreet ?? "") \(facilityCity ?? "")"
                     self.FacilityStateZip.text = "\(facilityState ?? "") \(facilityZip ?? "")"
@@ -171,6 +174,7 @@ class FacViewController: UIViewController {
         task.resume()
     }
     
+    //finds which index of summaries the statute corresponds to
     func findStatuteIndex(statute: String) -> Int? {
         var count = 0
         if let mySums = summaries {
@@ -185,6 +189,7 @@ class FacViewController: UIViewController {
         return nil
     }
     
+    //updates information about facility relating to selected statute
     func updateLabels(statute: String) {
         
         if let i = findStatuteIndex(statute: statute) {

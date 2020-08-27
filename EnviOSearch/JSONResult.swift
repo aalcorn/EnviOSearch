@@ -13,6 +13,7 @@ struct ResultSet: Decodable {
     let Results: Results
 }
 
+//Two gets both have a "Results" with different parameters. Made some parameters optional to allow use of this struct for both calls.
 struct Results: Decodable {
     let QueryRows: String?
     let Facilities: [Facility]?

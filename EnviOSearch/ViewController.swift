@@ -5,13 +5,14 @@
 //  Created by HGS on 7/15/20.
 //  Copyright © 2020 HGS. All rights reserved.
 //
-// App ID: ""
+// App ID: "ca-app-pub-6391108766292407~8118816606"
 // 
 
 import UIKit
 import MapKit
 import GoogleMobileAds
 import AVFoundation
+import AdSupport
 
 class ViewController: UIViewController, GADInterstitialDelegate {
     
@@ -54,7 +55,9 @@ class ViewController: UIViewController, GADInterstitialDelegate {
         blurView.bounds = self.view.bounds
         popupView.bounds = CGRect(x: 0, y: 0, width: self.view.bounds.width * 0.9, height: self.view.bounds.height * 0.4)
         
-        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        //interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        interstitial = GADInterstitial(adUnitID: "redacted")
+        //mapAd ID: "redacted"
         interstitial.delegate = self
         let request = GADRequest()
         interstitial.load(request)
@@ -63,7 +66,9 @@ class ViewController: UIViewController, GADInterstitialDelegate {
         locationManager.startUpdatingLocation()
         adView.delegate = self
         
-        adView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        //adView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        adView.adUnitID = "redacted"
+        //homeBanner ID: "redacted"
         adView.rootViewController = self
         adView.load(GADRequest())
         
@@ -75,7 +80,7 @@ class ViewController: UIViewController, GADInterstitialDelegate {
         else {
             print("First launch")
             //Set to true
-            //UserDefaults.standard.set(true, forKey: "launchedBefore")
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
             //Present screen explaining source of information
             animateIn(desiredView: blurView)
             animateIn(desiredView: popupView)

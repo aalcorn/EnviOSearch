@@ -54,28 +54,18 @@ class MapViewController: UIViewController, GADInterstitialDelegate {
         
         mMap.delegate = self
         
-        moreInfoButton.isHidden = true
-        
-        let myAnnotation = MKPointAnnotation()
-        myAnnotation.title = "My title"
-        myAnnotation.subtitle = "My desc"
-        myAnnotation.coordinate = CLLocationCoordinate2D(latitude: 38, longitude: -77)
-        mMap.addAnnotation(myAnnotation)
-        mMap.showsUserLocation = true
-        
-        //Display user location
-        
-        //Get Json
-        
-        //Place Markers based on Json
-        
-        //Add button to send user to facility page depending on which is selected
-        
         configureLocationServices()
         locationManager.startUpdatingLocation()
+        
+        //Zoom to user's current location based on search radius
         zoomToLocation(with: CLLocationCoordinate2D(latitude: lat, longitude: lon))
-        //mMap.showsUserLocation = true
-        //zoomToLocation(with: currentLocation ?? CLLocationCoordinate2D(latitude: 0,longitude: 0))
+        
+        //Button appears and sends user to relevant facility page when clicked
+        moreInfoButton.isHidden = true
+        
+        //Display user location
+        mMap.showsUserLocation = true
+
         getJSON()
         
     }
@@ -121,7 +111,7 @@ class MapViewController: UIViewController, GADInterstitialDelegate {
         mMap.setRegion(zoomRegion, animated: true)
     }
 
-    
+    //Gets JSON data for facilities in the radius specified
     private func getJSON() {
         let myURL = "https://ofmpub.epa.gov/echo/echo_rest_services.get_facility_info?output=JSON&p_lat=\(lat)&p_long=\(lon)&p_radius=\(radius)"
         print(myURL)
@@ -134,8 +124,6 @@ class MapViewController: UIViewController, GADInterstitialDelegate {
                 }
                 return
         }
-        
-        //guard let testurl = URL(string: "https://jsonplaceholder.typicode.com/users") else {return}
         
         let session = URLSession.shared
         let task = session.dataTask(with: url) { (data, _, _) in
@@ -177,6 +165,7 @@ class MapViewController: UIViewController, GADInterstitialDelegate {
         
     }
 
+    //Uses the facility's compliance status and type to decide which icon to use, then adds a marker to the map
     private func addFacilityToMap(CAA: String, CWA: String, SDWA: String, RCRA: String, id: String, name: String, latitude: Double, longitude: Double, NCQtrs: Int) {
         var subtitle = ""
         
@@ -288,7 +277,7 @@ class MapViewController: UIViewController, GADInterstitialDelegate {
             print("Error")
         }
     }
-    
+
 }
 
 extension MapViewController: CLLocationManagerDelegate {
@@ -369,6 +358,7 @@ extension MapViewController: MKMapViewDelegate {
         return annotationView
     }
     
+    //When annotation is selected, play corresponding sound and show the more info button
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         print("Annotation Selected: \(String(describing: view.annotation?.title))")
         
@@ -406,10 +396,10 @@ extension MapViewController: MKMapViewDelegate {
         moreInfoButton.isHidden = true
         facID = nil
     }
-    
 }
 
 extension UIImage {
+    //Make the image a certain size.
     func scaleImage(toSize newSize: CGSize) -> UIImage? {
         var newImage: UIImage?
         let newRect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height).integral

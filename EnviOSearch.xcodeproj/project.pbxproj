@@ -52,7 +52,7 @@
 		566DD89C9214828520F179BA /* Pods-EnviOSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnviOSearch.debug.xcconfig"; path = "Target Support Files/Pods-EnviOSearch/Pods-EnviOSearch.debug.xcconfig"; sourceTree = "<group>"; };
 		57F59F7D9E131960259A7311 /* Pods-EnviOSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnviOSearch.release.xcconfig"; path = "Target Support Files/Pods-EnviOSearch/Pods-EnviOSearch.release.xcconfig"; sourceTree = "<group>"; };
 		7B043649FBE58C8FF71D105A /* Pods_EnviOSearch_EnviOSearchUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnviOSearch_EnviOSearchUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8FF97A3024BF5BC900D43786 /* EnviOSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnviOSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8FF97A3024BF5BC900D43786 /* EnviroSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnviroSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FF97A3324BF5BC900D43786 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FF97A3524BF5BC900D43786 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8FF97A3724BF5BC900D43786 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 		8FF97A3124BF5BC900D43786 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8FF97A3024BF5BC900D43786 /* EnviOSearch.app */,
+				8FF97A3024BF5BC900D43786 /* EnviroSearch.app */,
 				8FF97A4624BF5BCA00D43786 /* EnviOSearchTests.xctest */,
 				8FF97A5124BF5BCA00D43786 /* EnviOSearchUITests.xctest */,
 			);
@@ -214,7 +214,7 @@
 			);
 			name = EnviOSearch;
 			productName = EnviOSearch;
-			productReference = 8FF97A3024BF5BC900D43786 /* EnviOSearch.app */;
+			productReference = 8FF97A3024BF5BC900D43786 /* EnviroSearch.app */;
 			productType = "com.apple.product-type.application";
 		};
 		8FF97A4524BF5BCA00D43786 /* EnviOSearchTests */ = {
@@ -626,7 +626,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = hgs.EnviOSearch;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = EnviroSearch;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -644,7 +644,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = hgs.EnviOSearch;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = EnviroSearch;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
