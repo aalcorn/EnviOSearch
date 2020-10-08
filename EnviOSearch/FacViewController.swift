@@ -45,10 +45,10 @@ class FacViewController: UIViewController {
         FacAdView.delegate = self
         
         //FacAdView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-        FacAdView.adUnitID = "redacted"
-        //facAd ID: "redacted"
+        FacAdView.adUnitID = "ca-app-pub-6391108766292407/4454510553"
+        //facAd ID: "ca-app-pub-6391108766292407/4454510553"
         FacAdView.rootViewController = self
-        FacAdView.load(GADRequest())
+        //FacAdView.load(GADRequest())
         
         //Get facility's info
         getFacJSON()

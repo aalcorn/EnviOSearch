@@ -13,6 +13,7 @@ import MapKit
 import GoogleMobileAds
 import AVFoundation
 import AdSupport
+import CoreLocation
 
 class ViewController: UIViewController, GADInterstitialDelegate {
     
@@ -56,8 +57,8 @@ class ViewController: UIViewController, GADInterstitialDelegate {
         popupView.bounds = CGRect(x: 0, y: 0, width: self.view.bounds.width * 0.9, height: self.view.bounds.height * 0.4)
         
         //interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
-        interstitial = GADInterstitial(adUnitID: "redacted")
-        //mapAd ID: "redacted"
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-6391108766292407/5032244997")
+        //mapAd ID: "ca-app-pub-6391108766292407/5032244997"
         interstitial.delegate = self
         let request = GADRequest()
         interstitial.load(request)
@@ -67,8 +68,8 @@ class ViewController: UIViewController, GADInterstitialDelegate {
         adView.delegate = self
         
         //adView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-        adView.adUnitID = "redacted"
-        //homeBanner ID: "redacted"
+        adView.adUnitID = "ca-app-pub-6391108766292407/5443308538"
+        //homeBanner ID: "ca-app-pub-6391108766292407/5443308538"
         adView.rootViewController = self
         adView.load(GADRequest())
         
@@ -96,6 +97,19 @@ class ViewController: UIViewController, GADInterstitialDelegate {
             print("NOT Just opened!")
             
         }
+        
+        let address = "1 Infinite Loop, Cupertino, CA 95014"
+
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(address) {
+            placemarks, error in
+            let placemark = placemarks?.first
+            let lat = placemark?.location?.coordinate.latitude
+            let lon = placemark?.location?.coordinate.longitude
+            print("Lat: \(lat), Lon: \(lon)")
+        }
+        
+        
         
     }
     
@@ -146,7 +160,8 @@ class ViewController: UIViewController, GADInterstitialDelegate {
     
     @IBAction func searchPressed(_ sender: Any) {
         if interstitial.isReady {
-            interstitial.present(fromRootViewController: self)
+            //interstitial.present(fromRootViewController: self)
+            doMapSegue() //Remove this line if you uncomment line above
         }
         else {
             doMapSegue()
@@ -167,6 +182,18 @@ class ViewController: UIViewController, GADInterstitialDelegate {
             vc.onlyNC = self.onlyNC
             vc.lat = currentLocation?.latitude ?? 25
             vc.lon = currentLocation?.longitude ?? 25
+            
+        case "customMapSegue" :
+            let vc = segue.destination as! MapViewController
+            vc.radius = self.radius
+            vc.CAAClicked = self.CAAClicked
+            vc.CWAClicked = self.CWAClicked
+            vc.RCRAClicked = self.RCRAClicked
+            vc.SDWAClicked = self.SDWAClicked
+            vc.onlyNC = self.onlyNC
+            vc.lat = currentLocation?.latitude ?? 25
+            vc.lon = currentLocation?.longitude ?? 25
+            vc.searchType = "customLocation"
             
         default:
             break

@@ -15,11 +15,12 @@ import MapKit
 import GoogleMobileAds
 import AVFoundation
 
-class MapViewController: UIViewController, GADInterstitialDelegate {
+class MapViewController: UIViewController {
     
     @IBOutlet weak var mMap: MKMapView!
     @IBOutlet weak var moreInfoButton: UIButton!
     
+    @IBOutlet weak var locationButton: UIButton!
     @IBOutlet weak var loadWheel: UIActivityIndicatorView!
     @IBOutlet weak var legendImage: UIImageView!
     @IBOutlet weak var legendLabel: UIButton!
@@ -31,26 +32,26 @@ class MapViewController: UIViewController, GADInterstitialDelegate {
     var SDWAClicked = true
     var RCRAClicked = true
     var onlyNC = true
+    var ableToSearch = false
     var radius:Float = 0.5
     var lat:Double = 0
     var lon:Double = 0
     var facID:String?
+    
+    var searchType = "userLocation"
+    
+    var newLocationAnno = MKPointAnnotation()
     
     let newAnno = MKPointAnnotation()
     
     private let locationManager = CLLocationManager()
     private var currentLocation: CLLocationCoordinate2D?
     
-    var interstitial: GADInterstitial!
-    
     var audioPlayer: AVAudioPlayer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
-        let request = GADRequest()
-        interstitial.load(request)
         
         mMap.delegate = self
         
@@ -58,15 +59,40 @@ class MapViewController: UIViewController, GADInterstitialDelegate {
         locationManager.startUpdatingLocation()
         
         //Zoom to user's current location based on search radius
-        zoomToLocation(with: CLLocationCoordinate2D(latitude: lat, longitude: lon))
+        
         
         //Button appears and sends user to relevant facility page when clicked
-        moreInfoButton.isHidden = true
+        moreInfoButton.isEnabled = false
         
         //Display user location
-        mMap.showsUserLocation = true
+        
+        
+        if searchType == "userLocation" {
+            
+        }
+        else if searchType == "customLocation" {
+            loadWheel.isHidden = true
+            mMap.showsUserLocation = false
+            newLocationAnno.title = "Custom Location"
+            newLocationAnno.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+            newLocationAnno.subtitle = "Move me to your custom location!"
+            mMap.addAnnotation(newLocationAnno)
+            
+            locationButton.setTitle("Select Location", for: .normal)
+            showToast(message: "Move marker to new location")
+            
+            locationButton.setTitle("Select Location", for: .normal)
+            showToast(message: "Move marker to new location")
+            ableToSearch = true
+            
+        }
+        else {
+            mMap.showsUserLocation = true
+            zoomToLocation(with: CLLocationCoordinate2D(latitude: lat, longitude: lon))
+            getJSON()
+        }
 
-        getJSON()
+        
         
     }
     
@@ -74,8 +100,10 @@ class MapViewController: UIViewController, GADInterstitialDelegate {
         switch legendImage.isHidden {
         case true:
             legendImage.isHidden = false
+            legendLabel.setTitle("Hide Legend", for: .normal)
         case false:
             legendImage.isHidden = true
+            legendLabel.setTitle("Show Legend", for: .normal)
         }
     }
     
@@ -97,6 +125,53 @@ class MapViewController: UIViewController, GADInterstitialDelegate {
         
     }
     
+    
+    @IBAction func locationButtonClicked(_ sender: Any) {
+        
+        if !ableToSearch {
+            mMap.removeAnnotations(mMap.annotations)
+            mMap.showsUserLocation = false
+            newLocationAnno.title = "Custom Location"
+            newLocationAnno.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+            newLocationAnno.subtitle = "Move me to your custom location!"
+            mMap.addAnnotation(newLocationAnno)
+            
+            locationButton.setTitle("Select Location", for: .normal)
+            showToast(message: "Move marker to new location")
+            
+            locationButton.setTitle("Select Location", for: .normal)
+            showToast(message: "Move marker to new location")
+            ableToSearch = true
+            
+        }
+        
+        else {
+            let newCoord = newLocationAnno.coordinate
+            lat = newCoord.latitude
+            lon = newCoord.longitude
+            
+            mMap.removeAnnotations(mMap.annotations)
+            
+            mMap.showsUserLocation = false
+            newLocationAnno.title = "Custom Location"
+            newLocationAnno.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+            newLocationAnno.subtitle = "Custom Location"
+            mMap.addAnnotation(newLocationAnno)
+            
+            locationButton.setTitle("Choose New Location", for: .normal)
+            disableButton()
+            
+            
+            getJSON()
+            loadWheel.isHidden = false
+            
+            
+        }
+        
+        
+    }
+
+    
     private func configureLocationServices() {
         locationManager.delegate = self
         if CLLocationManager.authorizationStatus() == .notDetermined || CLLocationManager.authorizationStatus() == .restricted {
@@ -113,6 +188,9 @@ class MapViewController: UIViewController, GADInterstitialDelegate {
 
     //Gets JSON data for facilities in the radius specified
     private func getJSON() {
+        disableButton()
+        zoomToLocation(with: CLLocationCoordinate2D(latitude: lat, longitude: lon))
+        var totalNC:Double = 0
         let myURL = "https://ofmpub.epa.gov/echo/echo_rest_services.get_facility_info?output=JSON&p_lat=\(lat)&p_long=\(lon)&p_radius=\(radius)"
         print(myURL)
         let urlString = myURL
@@ -120,7 +198,10 @@ class MapViewController: UIViewController, GADInterstitialDelegate {
             ) else {
             print("ERROR")
                 DispatchQueue.main.async {
+                    self.loadWheel.isHidden = true
                     self.showToast(message: "Connection Error!")
+                    self.enableButton()
+                    self.ableToSearch = false
                 }
                 return
         }
@@ -130,23 +211,32 @@ class MapViewController: UIViewController, GADInterstitialDelegate {
             guard let data = data else {
                 print("DATA ERROR")
                 DispatchQueue.main.async {
+                    self.loadWheel.isHidden = true
                     self.showToast(message: "Connection Error!")
+                    self.enableButton()
+                    self.ableToSearch = false
                 }
                 return
             }
             do {
                 let resultSet = try JSONDecoder().decode(ResultSet.self, from: data)
                 if let facilities = resultSet.Results.Facilities {
+                    let numFac = Double(resultSet.Results.QueryRows ?? "0")
                     for facility in facilities {
                         let facLat = Double(facility.FacLat)
                         let facLon = Double(facility.FacLong)
                         let facNC = Int(facility.FacQtrsWithNC ?? "-1")
+                        totalNC += Double(Int(facility.FacQtrsWithNC ?? "0") ?? 0)
                         self.addFacilityToMap(CAA: facility.CAAComplianceStatus ?? "NA", CWA: facility.CWAComplianceStatus ?? "NA", SDWA: facility.SDWAComplianceStatus ?? "NA", RCRA: facility.RCRAComplianceStatus ?? "NA", id: facility.RegistryID, name: facility.FacName, latitude: facLat ?? 80, longitude: facLon ?? -80, NCQtrs: facNC ?? -1)
                     }
-                    
+                    print("The average is: " + String(totalNC/numFac!))
+                    print(totalNC)
+                    print(numFac!)
                     DispatchQueue.main.async {
                         self.loadWheel.isHidden = true
                         self.showToast(message: "Finished")
+                        self.enableButton()
+                        self.ableToSearch = false
                     }
                 }
                 else {
@@ -154,6 +244,8 @@ class MapViewController: UIViewController, GADInterstitialDelegate {
                     DispatchQueue.main.async {
                         self.loadWheel.isHidden = true
                         self.showToast(message: "Too many facilities! Lower radius")
+                        self.enableButton()
+                        self.ableToSearch = false
                     }
                 }
                 
@@ -277,6 +369,16 @@ class MapViewController: UIViewController, GADInterstitialDelegate {
             print("Error")
         }
     }
+    
+    func enableButton() {
+        locationButton.isEnabled = true
+        locationButton.alpha = 1.0
+    }
+    
+    func disableButton() {
+        locationButton.isEnabled = false
+        locationButton.alpha = 0.6
+    }
 
 }
 
@@ -349,6 +451,14 @@ extension MapViewController: MKMapViewDelegate {
                 print("None Found")
             }
         }
+        else if subtitleArray[0] == "Move" {
+            annotationView?.image = UIImage(named: "EnviroLogo")?.scaleImage(toSize: markerSize)
+            annotationView?.isDraggable = true
+        }
+        else if subtitleArray[0] == "Custom" {
+            annotationView?.image = UIImage(named: "EnviroLogo")?.scaleImage(toSize: markerSize)
+            annotationView?.isDraggable = false
+        }
         else {
             return nil
         }
@@ -371,7 +481,7 @@ extension MapViewController: MKMapViewDelegate {
         if subtitleArray[0] == "High" || subtitleArray[0] == "Mid" || subtitleArray[0] == "No" && subtitleArray[0] != " " {
             facID = String(subtitleArray[4])
             print(facID ?? "None")
-            moreInfoButton.isHidden = false
+            moreInfoButton.isEnabled = true
             switch subtitleArray[3] {
             case "A":
                 playSound(soundName: "CAA")
@@ -393,7 +503,7 @@ extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         print("Unselected")
-        moreInfoButton.isHidden = true
+        moreInfoButton.isEnabled = false
         facID = nil
     }
 }

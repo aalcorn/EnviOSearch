@@ -26,8 +26,8 @@ class MoreInfoViewController: UIViewController {
         moreInfoAdview.delegate = self
         
         //moreInfoAdview.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-        moreInfoAdview.adUnitID = "redacted"
-        //moreInfoAd ID: "redacted"
+        moreInfoAdview.adUnitID = "ca-app-pub-6391108766292407/9351614012"
+        //moreInfoAd ID: "ca-app-pub-6391108766292407/9351614012"
         moreInfoAdview.rootViewController = self
         moreInfoAdview.load(GADRequest())
     }
