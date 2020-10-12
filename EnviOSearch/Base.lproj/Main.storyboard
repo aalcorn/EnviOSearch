@@ -112,6 +112,9 @@
                                         <state key="normal" title="Address">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="addressButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KSh-24-tKW"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="bus-Bu-Sxa">
                                         <rect key="frame" x="140.66666666666669" y="0.0" width="132.66666666666669" height="30"/>
@@ -198,6 +201,8 @@
                         <outlet property="RCRASwitch" destination="2CL-9N-flw" id="qp6-tq-4Od"/>
                         <outlet property="SDWASwitch" destination="EAA-Oy-ZIW" id="DFu-HP-kNU"/>
                         <outlet property="adView" destination="9Sc-ND-NtX" id="4fV-pk-0Rt"/>
+                        <outlet property="addressTextView" destination="MeW-Vt-LA2" id="3En-r4-Hiy"/>
+                        <outlet property="addressView" destination="JeN-cN-UCh" id="agf-Tr-l22"/>
                         <outlet property="blurView" destination="wwv-r6-uBH" id="LZf-Pz-B2c"/>
                         <outlet property="milesLabel" destination="oKP-L7-YC1" id="S8r-86-r5M"/>
                         <outlet property="milesSlider" destination="PeA-a6-C9z" id="9aa-uY-AkK"/>
@@ -248,8 +253,53 @@
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="SGj-DZ-c72"/>
                 </view>
+                <view contentMode="scaleToFill" id="JeN-cN-UCh">
+                    <rect key="frame" x="0.0" y="0.0" width="419" height="197"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaL-FZ-ep9">
+                            <rect key="frame" x="64" y="147" width="48" height="30"/>
+                            <state key="normal" title="Cancel"/>
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jZG-4M-41K"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6s-iN-TjJ">
+                            <rect key="frame" x="300" y="147" width="55" height="30"/>
+                            <state key="normal" title="Confirm"/>
+                            <connections>
+                                <action selector="confButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2s3-NH-toz"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5f-z2-7wI">
+                            <rect key="frame" x="0.0" y="20" width="419" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Address here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MeW-Vt-LA2">
+                            <rect key="frame" x="20" y="61" width="379" height="34"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="32L-oG-4Cp" firstAttribute="bottom" secondItem="eaL-FZ-ep9" secondAttribute="bottom" constant="20" id="5L6-89-d16"/>
+                        <constraint firstItem="F5f-z2-7wI" firstAttribute="leading" secondItem="32L-oG-4Cp" secondAttribute="leading" id="85V-Bx-TU5"/>
+                        <constraint firstItem="32L-oG-4Cp" firstAttribute="trailing" secondItem="w6s-iN-TjJ" secondAttribute="trailing" constant="64" id="cPw-LJ-hwC"/>
+                        <constraint firstItem="MeW-Vt-LA2" firstAttribute="leading" secondItem="32L-oG-4Cp" secondAttribute="leading" constant="20" id="dqH-Lv-XpS"/>
+                        <constraint firstItem="MeW-Vt-LA2" firstAttribute="top" secondItem="F5f-z2-7wI" secondAttribute="bottom" constant="20" id="j7B-7o-6em"/>
+                        <constraint firstItem="eaL-FZ-ep9" firstAttribute="leading" secondItem="32L-oG-4Cp" secondAttribute="leading" constant="64" id="moS-tb-XDp"/>
+                        <constraint firstItem="32L-oG-4Cp" firstAttribute="trailing" secondItem="MeW-Vt-LA2" secondAttribute="trailing" constant="20" id="oMw-A5-o4A"/>
+                        <constraint firstItem="32L-oG-4Cp" firstAttribute="trailing" secondItem="F5f-z2-7wI" secondAttribute="trailing" id="rLX-Ze-xnJ"/>
+                        <constraint firstItem="F5f-z2-7wI" firstAttribute="top" secondItem="32L-oG-4Cp" secondAttribute="top" constant="20" id="uph-fk-C3O"/>
+                        <constraint firstItem="32L-oG-4Cp" firstAttribute="bottom" secondItem="w6s-iN-TjJ" secondAttribute="bottom" constant="20" id="yE7-bL-f6F"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="32L-oG-4Cp"/>
+                </view>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="114.94565217391305"/>
+            <point key="canvasLocation" x="101" y="118"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="7fD-HP-7Xa">
@@ -914,7 +964,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Z0Q-rS-vuT"/>
+        <segue reference="FMi-t5-A3a"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="legend" width="988" height="359"/>

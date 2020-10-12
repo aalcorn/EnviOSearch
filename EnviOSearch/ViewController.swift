@@ -19,7 +19,11 @@ class ViewController: UIViewController, GADInterstitialDelegate {
     
     @IBOutlet var blurView: UIVisualEffectView!
     
+    @IBOutlet var addressView: UIView!
+    
     @IBOutlet var popupView: UIView!
+    
+    @IBOutlet weak var addressTextView: UITextField!
     
     @IBOutlet weak var milesLabel: UILabel!
     
@@ -41,6 +45,11 @@ class ViewController: UIViewController, GADInterstitialDelegate {
     
     var radius:Float = 0.5
     
+    var latitude = 0.0
+    var longitude = 0.0
+    
+    var searchType = "userLocation"
+    
     var interstitial: GADInterstitial!
    
     private let locationManager = CLLocationManager()
@@ -55,6 +64,8 @@ class ViewController: UIViewController, GADInterstitialDelegate {
         // Do any additional setup after loading the view.
         blurView.bounds = self.view.bounds
         popupView.bounds = CGRect(x: 0, y: 0, width: self.view.bounds.width * 0.9, height: self.view.bounds.height * 0.4)
+        addressView.bounds = CGRect(x: 0, y: 0, width: self.view.bounds.width * 0.9, height: self.view.bounds.height * 0.4)
+        addressView.layer.cornerRadius = 10
         
         //interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
         interstitial = GADInterstitial(adUnitID: "ca-app-pub-6391108766292407/5032244997")
@@ -97,18 +108,6 @@ class ViewController: UIViewController, GADInterstitialDelegate {
             print("NOT Just opened!")
             
         }
-        
-        let address = "1 Infinite Loop, Cupertino, CA 95014"
-
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(address) {
-            placemarks, error in
-            let placemark = placemarks?.first
-            let lat = placemark?.location?.coordinate.latitude
-            let lon = placemark?.location?.coordinate.longitude
-            print("Lat: \(lat), Lon: \(lon)")
-        }
-        
         
         
     }
@@ -158,7 +157,42 @@ class ViewController: UIViewController, GADInterstitialDelegate {
         performSegue(withIdentifier: "toMapSegue", sender: self)
     }
     
+    @IBAction func addressButtonPressed(_ sender: Any) {
+        
+        self.animateIn(desiredView: self.blurView)
+        self.animateIn(desiredView: self.addressView)
+            
+    }
+    
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        self.animateOut(desiredView: self.addressView)
+        self.animateOut(desiredView: self.blurView)
+    }
+    
+    @IBAction func confButtonPressed(_ sender: Any) {
+        if let address = addressTextView.text {
+            let geocoder = CLGeocoder()
+            geocoder.geocodeAddressString(address) {
+                placemarks, error in
+                let placemark = placemarks?.first
+                let lat = placemark?.location?.coordinate.latitude
+                let lon = placemark?.location?.coordinate.longitude
+                
+                self.latitude = lat ?? 0
+                self.longitude = lon ?? 0
+                print("Lat: \(lat), Lon: \(lon)")
+                self.searchType = "address"
+                self.doMapSegue()
+            }
+        }
+        
+        
+        
+    }
+    
     @IBAction func searchPressed(_ sender: Any) {
+        latitude = currentLocation?.latitude ?? 25
+        longitude = currentLocation?.longitude ?? 25
         if interstitial.isReady {
             //interstitial.present(fromRootViewController: self)
             doMapSegue() //Remove this line if you uncomment line above
@@ -180,8 +214,9 @@ class ViewController: UIViewController, GADInterstitialDelegate {
             vc.RCRAClicked = self.RCRAClicked
             vc.SDWAClicked = self.SDWAClicked
             vc.onlyNC = self.onlyNC
-            vc.lat = currentLocation?.latitude ?? 25
-            vc.lon = currentLocation?.longitude ?? 25
+            vc.lat = self.latitude
+            vc.lon = self.longitude
+            vc.searchType = self.searchType
             
         case "customMapSegue" :
             let vc = segue.destination as! MapViewController

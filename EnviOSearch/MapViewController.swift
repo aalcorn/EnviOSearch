@@ -64,13 +64,7 @@ class MapViewController: UIViewController {
         //Button appears and sends user to relevant facility page when clicked
         moreInfoButton.isEnabled = false
         
-        //Display user location
-        
-        
-        if searchType == "userLocation" {
-            
-        }
-        else if searchType == "customLocation" {
+        if searchType == "customLocation" {
             loadWheel.isHidden = true
             mMap.showsUserLocation = false
             newLocationAnno.title = "Custom Location"
@@ -86,9 +80,23 @@ class MapViewController: UIViewController {
             ableToSearch = true
             
         }
-        else {
+        else if searchType == "userLocation" {
             mMap.showsUserLocation = true
             zoomToLocation(with: CLLocationCoordinate2D(latitude: lat, longitude: lon))
+            disableButton()
+            getJSON()
+        }
+        else {
+            mMap.showsUserLocation = false
+            newLocationAnno.title = "Custom Location"
+            newLocationAnno.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+            newLocationAnno.subtitle = "Custom Location"
+            mMap.addAnnotation(newLocationAnno)
+            zoomToLocation(with: CLLocationCoordinate2D(latitude: lat, longitude: lon))
+            
+            locationButton.setTitle("Choose New Location", for: .normal)
+            disableButton()
+            
             getJSON()
         }
 
