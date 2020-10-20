@@ -20,10 +20,19 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mMap: MKMapView!
     @IBOutlet weak var moreInfoButton: UIButton!
     
+    @IBOutlet weak var enviroScoreLabel: UILabel!
     @IBOutlet weak var locationButton: UIButton!
     @IBOutlet weak var loadWheel: UIActivityIndicatorView!
     @IBOutlet weak var legendImage: UIImageView!
     @IBOutlet weak var legendLabel: UIButton!
+    
+    @IBOutlet weak var star1: UIImageView!
+    @IBOutlet weak var star2: UIImageView!
+    @IBOutlet weak var star3: UIImageView!
+    @IBOutlet weak var star4: UIImageView!
+    @IBOutlet weak var star5: UIImageView!
+    
+    
     
     let markerSize = CGSize(width: 20, height: 20)
     
@@ -79,6 +88,7 @@ class MapViewController: UIViewController {
             showToast(message: "Move marker to new location")
             ableToSearch = true
             
+            enviroScoreLabel.text = " "
         }
         else if searchType == "userLocation" {
             mMap.showsUserLocation = true
@@ -137,6 +147,14 @@ class MapViewController: UIViewController {
     @IBAction func locationButtonClicked(_ sender: Any) {
         
         if !ableToSearch {
+            enviroScoreLabel.text = " "
+            
+            self.star1.image = UIImage(systemName: "star")
+            self.star2.image = UIImage(systemName: "star")
+            self.star3.image = UIImage(systemName: "star")
+            self.star4.image = UIImage(systemName: "star")
+            self.star5.image = UIImage(systemName: "star")
+            
             mMap.removeAnnotations(mMap.annotations)
             mMap.showsUserLocation = false
             newLocationAnno.title = "Custom Location"
@@ -150,10 +168,12 @@ class MapViewController: UIViewController {
             locationButton.setTitle("Select Location", for: .normal)
             showToast(message: "Move marker to new location")
             ableToSearch = true
-            
+        
         }
         
         else {
+            enviroScoreLabel.text = "Pending area ranking"
+            
             let newCoord = newLocationAnno.coordinate
             lat = newCoord.latitude
             lon = newCoord.longitude
@@ -198,7 +218,7 @@ class MapViewController: UIViewController {
     private func getJSON() {
         disableButton()
         zoomToLocation(with: CLLocationCoordinate2D(latitude: lat, longitude: lon))
-        var totalNC:Double = 0
+        var totalNC:Float = 0
         let myURL = "https://ofmpub.epa.gov/echo/echo_rest_services.get_facility_info?output=JSON&p_lat=\(lat)&p_long=\(lon)&p_radius=\(radius)"
         print(myURL)
         let urlString = myURL
@@ -234,13 +254,93 @@ class MapViewController: UIViewController {
                         let facLat = Double(facility.FacLat)
                         let facLon = Double(facility.FacLong)
                         let facNC = Int(facility.FacQtrsWithNC ?? "-1")
-                        totalNC += Double(Int(facility.FacQtrsWithNC ?? "0") ?? 0)
+                        totalNC += Float(Int(facility.FacQtrsWithNC ?? "0") ?? 0)
                         self.addFacilityToMap(CAA: facility.CAAComplianceStatus ?? "NA", CWA: facility.CWAComplianceStatus ?? "NA", SDWA: facility.SDWAComplianceStatus ?? "NA", RCRA: facility.RCRAComplianceStatus ?? "NA", id: facility.RegistryID, name: facility.FacName, latitude: facLat ?? 80, longitude: facLon ?? -80, NCQtrs: facNC ?? -1)
                     }
-                    print("The average is: " + String(totalNC/numFac!))
+                    //print("The average is: " + String(totalNC/numFac!))
                     print(totalNC)
                     print(numFac!)
+                    let pi:Float = 3.14
+                    let baseline:Float = 12.57
+                    
+                    let enviroScore = totalNC/(((pi)*(self.radius*self.radius))/baseline)
+                    
+                    print(enviroScore)
+                    
                     DispatchQueue.main.async {
+                        switch enviroScore {
+                        case 0..<10:
+                            self.enviroScoreLabel.text = "Enviroscore:"
+                            self.star1.image = UIImage(systemName: "star.fill")
+                            self.star2.image = UIImage(systemName: "star.fill")
+                            self.star3.image = UIImage(systemName: "star.fill")
+                            self.star4.image = UIImage(systemName: "star.fill")
+                            self.star5.image = UIImage(systemName: "star.fill")
+                        case 10..<20:
+                            self.enviroScoreLabel.text = "Enviroscore:"
+                            self.star1.image = UIImage(systemName: "star.fill")
+                            self.star2.image = UIImage(systemName: "star.fill")
+                            self.star3.image = UIImage(systemName: "star.fill")
+                            self.star4.image = UIImage(systemName: "star.fill")
+                            self.star5.image = UIImage(systemName: "star.lefthalf.fill")
+                        case 20..<35:
+                            self.enviroScoreLabel.text = "Enviroscore:"
+                            self.star1.image = UIImage(systemName: "star.fill")
+                            self.star2.image = UIImage(systemName: "star.fill")
+                            self.star3.image = UIImage(systemName: "star.fill")
+                            self.star4.image = UIImage(systemName: "star.fill")
+                            self.star5.image = UIImage(systemName: "star")
+                        case 35..<70:
+                            self.enviroScoreLabel.text = "Enviroscore:"
+                            self.star1.image = UIImage(systemName: "star.fill")
+                            self.star2.image = UIImage(systemName: "star.fill")
+                            self.star3.image = UIImage(systemName: "star.fill")
+                            self.star4.image = UIImage(systemName: "star.lefthalf.fill")
+                            self.star5.image = UIImage(systemName: "star")
+                        case 70..<120:
+                            self.enviroScoreLabel.text = "Enviroscore:"
+                            self.star1.image = UIImage(systemName: "star.fill")
+                            self.star2.image = UIImage(systemName: "star.fill")
+                            self.star3.image = UIImage(systemName: "star.fill")
+                            self.star4.image = UIImage(systemName: "star")
+                            self.star5.image = UIImage(systemName: "star")
+                        case 120..<160:
+                            self.enviroScoreLabel.text = "Enviroscore:"
+                            self.star1.image = UIImage(systemName: "star.fill")
+                            self.star2.image = UIImage(systemName: "star.fill")
+                            self.star3.image = UIImage(systemName: "star.lefthalf.fill")
+                            self.star4.image = UIImage(systemName: "star")
+                            self.star5.image = UIImage(systemName: "star")
+                        case 160..<200:
+                            self.enviroScoreLabel.text = "Enviroscore:"
+                            self.star1.image = UIImage(systemName: "star.fill")
+                            self.star2.image = UIImage(systemName: "star.fill")
+                            self.star3.image = UIImage(systemName: "star")
+                            self.star4.image = UIImage(systemName: "star")
+                            self.star5.image = UIImage(systemName: "star")
+                        case 200..<240:
+                            self.enviroScoreLabel.text = "Enviroscore:"
+                            self.star1.image = UIImage(systemName: "star.fill")
+                            self.star2.image = UIImage(systemName: "star.lefthalf.fill")
+                            self.star3.image = UIImage(systemName: "star")
+                            self.star4.image = UIImage(systemName: "star")
+                            self.star5.image = UIImage(systemName: "star")
+                        case 240..<300:
+                            self.enviroScoreLabel.text = "Enviroscore:"
+                            self.star1.image = UIImage(systemName: "star.fill")
+                            self.star2.image = UIImage(systemName: "star")
+                            self.star3.image = UIImage(systemName: "star")
+                            self.star4.image = UIImage(systemName: "star")
+                            self.star5.image = UIImage(systemName: "star")
+                        default:
+                            self.enviroScoreLabel.text = "Enviroscore:"
+                            self.star1.image = UIImage(systemName: "star.lefthalf.fill")
+                            self.star2.image = UIImage(systemName: "star")
+                            self.star3.image = UIImage(systemName: "star")
+                            self.star4.image = UIImage(systemName: "star")
+                            self.star5.image = UIImage(systemName: "star")
+                        }
+                        
                         self.loadWheel.isHidden = true
                         self.showToast(message: "Finished")
                         self.enableButton()
