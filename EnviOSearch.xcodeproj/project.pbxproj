@@ -627,7 +627,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.0;
+				MARKETING_VERSION = 7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = hgs.EnviOSearch;
 				PRODUCT_NAME = EnviroSearch;
 				PROVISIONING_PROFILE_SPECIFIER = "EnviroSearch App Store";
@@ -649,7 +649,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.0;
+				MARKETING_VERSION = 7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = hgs.EnviOSearch;
 				PRODUCT_NAME = EnviroSearch;
 				PROVISIONING_PROFILE_SPECIFIER = "";

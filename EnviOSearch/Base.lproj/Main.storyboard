@@ -102,12 +102,11 @@
                                     <constraint firstAttribute="width" constant="320" id="0mW-K2-tne"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="0UZ-zc-bgJ">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="0UZ-zc-bgJ">
                                 <rect key="frame" x="0.0" y="648" width="414" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uyx-XC-pgM">
-                                        <rect key="frame" x="0.0" y="0.0" width="138" height="30"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="104.33333333333333" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="Address">
                                             <color key="titleColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -117,8 +116,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="bus-Bu-Sxa">
-                                        <rect key="frame" x="138" y="0.0" width="138" height="30"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="104.33333333333333" y="0.0" width="210.66666666666669" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="Current Location">
                                             <color key="titleColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -128,10 +126,9 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rR1-mY-CGQ">
-                                        <rect key="frame" x="276" y="0.0" width="138" height="30"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="315" y="0.0" width="99" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="Custom Location">
+                                        <state key="normal" title="Custom">
                                             <color key="titleColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -142,8 +139,8 @@
                                 <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search By:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msh-NE-vaq">
-                                <rect key="frame" x="166" y="623.66666666666663" width="82.333333333333314" height="20.333333333333371"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Type:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msh-NE-vaq">
+                                <rect key="frame" x="157" y="623.66666666666663" width="100" height="20.333333333333371"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -756,6 +753,13 @@
                                                     <constraint firstAttribute="height" constant="50" id="eOO-Dm-6y0"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wg1-xf-VD0">
+                                                <rect key="frame" x="351" y="738" width="47" height="30"/>
+                                                <state key="normal" title="Report"/>
+                                                <connections>
+                                                    <action selector="ReportClicked:" destination="VJs-0S-K2l" eventType="touchUpInside" id="RCv-Hb-b6l"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -769,6 +773,7 @@
                                             <constraint firstItem="bpi-5K-sfc" firstAttribute="centerX" secondItem="jFD-WU-PXM" secondAttribute="centerX" id="Ah1-S7-fhy"/>
                                             <constraint firstItem="DDR-Wa-9tw" firstAttribute="leading" secondItem="jFD-WU-PXM" secondAttribute="leading" constant="8" id="COR-bh-mJ1"/>
                                             <constraint firstItem="DDR-Wa-9tw" firstAttribute="top" secondItem="SU8-8h-8M4" secondAttribute="bottom" constant="16" id="Ddy-yT-e50"/>
+                                            <constraint firstAttribute="trailing" secondItem="Wg1-xf-VD0" secondAttribute="trailing" constant="16" id="Dmp-me-9gd"/>
                                             <constraint firstAttribute="trailing" secondItem="Qju-kw-27G" secondAttribute="trailing" constant="8" id="F61-fz-7PU"/>
                                             <constraint firstItem="cYW-xW-PmB" firstAttribute="leading" secondItem="jFD-WU-PXM" secondAttribute="leading" constant="8" id="FtG-Vp-H6R"/>
                                             <constraint firstAttribute="trailing" secondItem="DDR-Wa-9tw" secondAttribute="trailing" constant="8" id="IkY-Qd-z5M"/>
@@ -788,6 +793,7 @@
                                             <constraint firstItem="bpi-5K-sfc" firstAttribute="top" secondItem="jFD-WU-PXM" secondAttribute="top" constant="16" id="jru-DL-OMF"/>
                                             <constraint firstAttribute="trailing" secondItem="htv-nP-XBf" secondAttribute="trailing" constant="8" id="nXR-Xk-ESw"/>
                                             <constraint firstItem="5qb-rB-DNI" firstAttribute="centerX" secondItem="jFD-WU-PXM" secondAttribute="centerX" id="pbc-lY-Fvv"/>
+                                            <constraint firstItem="Wg1-xf-VD0" firstAttribute="top" secondItem="6a2-s2-iqA" secondAttribute="bottom" constant="43.670000000000002" id="ph3-0g-yp5"/>
                                             <constraint firstItem="8fu-Db-OL2" firstAttribute="top" secondItem="cYW-xW-PmB" secondAttribute="bottom" constant="16" id="tcD-vt-iBl"/>
                                             <constraint firstItem="e4d-ab-HbD" firstAttribute="top" secondItem="htv-nP-XBf" secondAttribute="bottom" constant="8" id="wfs-hc-tIJ"/>
                                             <constraint firstItem="bpi-5K-sfc" firstAttribute="leading" secondItem="jFD-WU-PXM" secondAttribute="leading" constant="8" id="ztx-uz-gJW"/>

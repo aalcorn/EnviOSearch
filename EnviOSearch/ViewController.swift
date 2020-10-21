@@ -15,7 +15,7 @@ import AVFoundation
 import AdSupport
 import CoreLocation
 
-class ViewController: UIViewController, GADInterstitialDelegate {
+class ViewController: UIViewController, GADInterstitialDelegate, UITextFieldDelegate {
     
     @IBOutlet var blurView: UIVisualEffectView!
     
@@ -67,7 +67,9 @@ class ViewController: UIViewController, GADInterstitialDelegate {
         addressView.bounds = CGRect(x: 0, y: 0, width: self.view.bounds.width * 0.9, height: self.view.bounds.height * 0.4)
         addressView.layer.cornerRadius = 10
         
-        //interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        addressTextView.delegate = self
+        
+        //interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910") This is the test
         interstitial = GADInterstitial(adUnitID: "ca-app-pub-6391108766292407/5032244997")
         //mapAd ID: "ca-app-pub-6391108766292407/5032244997"
         interstitial.delegate = self
@@ -78,11 +80,13 @@ class ViewController: UIViewController, GADInterstitialDelegate {
         locationManager.startUpdatingLocation()
         adView.delegate = self
         
-        //adView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        //adView.adUnitID = "ca-app-pub-3940256099942544/2934735716" this is the test
         adView.adUnitID = "ca-app-pub-6391108766292407/5443308538"
         //homeBanner ID: "ca-app-pub-6391108766292407/5443308538"
         adView.rootViewController = self
         adView.load(GADRequest())
+        
+        
         
         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
         if launchedBefore {
@@ -182,7 +186,13 @@ class ViewController: UIViewController, GADInterstitialDelegate {
                 self.longitude = lon ?? 0
                 print("Lat: \(lat), Lon: \(lon)")
                 self.searchType = "address"
-                self.doMapSegue()
+                if self.interstitial.isReady {
+                    self.interstitial.present(fromRootViewController: self)
+                    //doMapSegue() //Remove this line if you uncomment line above
+                }
+                else {
+                    self.doMapSegue()
+                }
             }
         }
         
@@ -194,14 +204,15 @@ class ViewController: UIViewController, GADInterstitialDelegate {
         latitude = currentLocation?.latitude ?? 25
         longitude = currentLocation?.longitude ?? 25
         if interstitial.isReady {
-            //interstitial.present(fromRootViewController: self)
-            doMapSegue() //Remove this line if you uncomment line above
+            interstitial.present(fromRootViewController: self)
+            //doMapSegue() //Remove this line if you uncomment line above
         }
         else {
             doMapSegue()
         }
         
     }
+    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -290,6 +301,11 @@ class ViewController: UIViewController, GADInterstitialDelegate {
         catch {
             print("Error")
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
 }

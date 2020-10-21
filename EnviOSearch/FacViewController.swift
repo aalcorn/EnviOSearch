@@ -48,7 +48,7 @@ class FacViewController: UIViewController {
         FacAdView.adUnitID = "ca-app-pub-6391108766292407/4454510553"
         //facAd ID: "ca-app-pub-6391108766292407/4454510553"
         FacAdView.rootViewController = self
-        //FacAdView.load(GADRequest())
+        FacAdView.load(GADRequest())
         
         //Get facility's info
         getFacJSON()
@@ -98,6 +98,11 @@ class FacViewController: UIViewController {
     //Send user to EPA page about current facility
     @IBAction func MoreInfoClicked(_ sender: Any) {
         let url = URL (string: "https://echo.epa.gov/detailed-facility-report?fid=\(facID ?? "0")")!
+        UIApplication.shared.open(url)
+    }
+    
+    @IBAction func ReportClicked(_ sender: Any) {
+        let url = URL (string: "https://echo.epa.gov/report-environmental-violations")!
         UIApplication.shared.open(url)
     }
     
