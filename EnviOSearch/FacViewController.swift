@@ -17,6 +17,13 @@ class FacViewController: UIViewController {
     @IBOutlet weak var SDWASwitch: UISwitch!
     @IBOutlet weak var RCRASwitch: UISwitch!
     
+    @IBOutlet weak var CAALabel: UILabel!
+    @IBOutlet weak var CWALabel: UILabel!
+    @IBOutlet weak var RCRALabel: UILabel!
+    @IBOutlet weak var SDWALabel: UILabel!
+    
+    
+    
     @IBOutlet weak var InspectionsLabel: UILabel!
     @IBOutlet weak var CurrentComplianceLabel: UILabel!
     @IBOutlet weak var LastInspectionLabel: UILabel!
@@ -36,6 +43,10 @@ class FacViewController: UIViewController {
     
     @IBOutlet weak var FacAdView: GADBannerView!
     
+    var hasCAA = false
+    var hasCWA = false
+    var hasRCRA = false
+    var hasSDWA = false
     
     var summaries: [Summaries]?
     
@@ -168,7 +179,7 @@ class FacViewController: UIViewController {
                     self.FacilityStateZip.text = "\(facilityState ?? "") \(facilityZip ?? "")"
                 }
                 
-                
+                self.disableUnusedStatutes()
                 
                 print("Before status")
                 //print(facilityData?[0].CurrentStatus ?? "No Value")
@@ -177,6 +188,58 @@ class FacViewController: UIViewController {
             }
         }
         task.resume()
+    }
+    
+    func disableUnusedStatutes() {
+        if let mySums = summaries {
+            for summary in mySums{
+                switch summary.Statute {
+                case "CAA":
+                    hasCAA = true
+                case "CWA":
+                    hasCWA = true
+                case "RCRA":
+                    hasRCRA = true
+                case "SDWA":
+                    hasSDWA = true
+                default:
+                    print("Do nothing")
+                }
+            }
+            
+            if !hasCAA {
+                print("Disable CAA")
+                DispatchQueue.main.async {
+                    self.CAALabel.textColor = UIColor.gray
+                    self.CAASwitch.isEnabled = false
+                }
+            }
+            if !hasCWA {
+                print("Disable CWA")
+                DispatchQueue.main.async {
+                    self.CWALabel.textColor = UIColor.gray
+                    self.CWASwitch.isEnabled = false
+                }
+                
+            }
+            if !hasRCRA {
+                print("Disable RCRA")
+                DispatchQueue.main.async {
+                    self.RCRALabel.textColor = UIColor.gray
+                    self.RCRASwitch.isEnabled = false
+                }
+                
+            }
+            if !hasSDWA {
+                print("Disable SDWA")
+                DispatchQueue.main.async {
+                    self.SDWALabel.textColor = UIColor.gray
+                    self.SDWASwitch.isEnabled = false
+                }
+                
+            }
+            
+        }
     }
     
     //finds which index of summaries the statute corresponds to
@@ -209,6 +272,27 @@ class FacViewController: UIViewController {
             EPACasesLabel.text = summaries?[i].Cases ?? "-"
             FormalActionPenaltyLabel.text = summaries?[i].TotalPenalties ?? "-"
             EPAPenaltiesLabel.text = summaries?[i].TotalCasePenalties ?? "-"
+            
+            let QtrsInNC: Int = Int(summaries?[i].QtrsInNC ?? "0") ?? 0
+            let QtrsInSNC: Int = Int(summaries?[i].QtrsInSNC ?? "0") ?? 0
+            
+            switch QtrsInNC {
+            case 1...7:
+                QtrsWithNCLabel.textColor = UIColor.orange
+            case 7...12:
+                QtrsWithNCLabel.textColor = UIColor.red
+            default:
+                QtrsWithNCLabel.textColor = UIColor.black
+            }
+            
+            switch QtrsInSNC {
+            case 1...7:
+                QtrsWithSigNCLabel.textColor = UIColor.orange
+            case 7...12:
+                QtrsWithSigNCLabel.textColor = UIColor.red
+            default:
+                QtrsWithSigNCLabel.textColor = UIColor.black
+            }
             
         }
         else {

@@ -373,55 +373,55 @@ class MapViewController: UIViewController {
         if NCQtrs != -1 {
             if NCQtrs >= 7 {
                 if CWA != "NA" && CWA != "Not Applicable" && CWAClicked {
-                    subtitle = "High Priority Non-Compliance W \(id)"
+                    subtitle = "High Priority CWA Non-Compliance ID: \(id)"
                     addMarker(title: name, subtitle: subtitle, latitude: latitude, longitude: longitude)
                 }
                 else if CAA != "NA" && CAA != "Not Applicable" && CAAClicked {
-                    subtitle = "High Priority Non-Compliance A \(id)"
+                    subtitle = "High Priority CAA Non-Compliance ID: \(id)"
                     addMarker(title: name, subtitle: subtitle, latitude: latitude, longitude: longitude)
                 }
                 else if RCRA != "NA" && RCRA != "Not Applicable" && RCRAClicked {
-                    subtitle = "High Priority Non-Compliance R \(id)"
+                    subtitle = "High Priority RCRA Non-Compliance ID: \(id)"
                     addMarker(title: name, subtitle: subtitle, latitude: latitude, longitude: longitude)
                 }
                 else if SDWA != "NA" && SDWA != "Not Applicable" && SDWAClicked {
-                    subtitle = "High Priority Non-Compliance S \(id)"
+                    subtitle = "High Priority SDWA Non-Compliance ID: \(id)"
                     addMarker(title: name, subtitle: subtitle, latitude: latitude, longitude: longitude)
                 }
             }
             else if NCQtrs > 0 {
                 if CWA != "NA" && CWA != "Not Applicable" && CWAClicked {
-                    subtitle = "Mid Priority Non-Compliance W \(id)"
+                    subtitle = "Mid Priority CWA Non-Compliance ID: \(id)"
                     addMarker(title: name, subtitle: subtitle, latitude: latitude, longitude: longitude)
                 }
                 else if CAA != "NA" && CAA != "Not Applicable" && CAAClicked {
-                    subtitle = "Mid Priority Non-Compliance A \(id)"
+                    subtitle = "Mid Priority CAA Non-Compliance ID: \(id)"
                     addMarker(title: name, subtitle: subtitle, latitude: latitude, longitude: longitude)
                 }
                 else if RCRA != "NA" && RCRA != "Not Applicable" && RCRAClicked {
-                    subtitle = "Mid Priority Non-Compliance R \(id)"
+                    subtitle = "Mid Priority RCRA Non-Compliance ID: \(id)"
                     addMarker(title: name, subtitle: subtitle, latitude: latitude, longitude: longitude)
                 }
                 else if SDWA != "NA" && SDWA != "Not Applicable" && SDWAClicked {
-                    subtitle = "Mid Priority Non-Compliance S \(id)"
+                    subtitle = "Mid Priority RCRA Non-Compliance ID: \(id)"
                     addMarker(title: name, subtitle: subtitle, latitude: latitude, longitude: longitude)
                 }
             }
             else if NCQtrs == 0 && !onlyNC {
                 if CWA != "NA" && CWA != "Not Applicable" && CWAClicked {
-                    subtitle = "No recent Non-Compliance W \(id)"
+                    subtitle = "No recent CWA Non-Compliance ID: \(id)"
                     addMarker(title: name, subtitle: subtitle, latitude: latitude, longitude: longitude)
                 }
                 else if CAA != "NA" && CAA != "Not Applicable" && CAAClicked {
-                    subtitle = "No recent Non-Compliance A \(id)"
+                    subtitle = "No recent CAA Non-Compliance ID: \(id)"
                     addMarker(title: name, subtitle: subtitle, latitude: latitude, longitude: longitude)
                 }
                 else if RCRA != "NA" && RCRA != "Not Applicable" && RCRAClicked {
-                    subtitle = "No recent Non-Compliance R \(id)"
+                    subtitle = "No recent RCRA Non-Compliance ID: \(id)"
                     addMarker(title: name, subtitle: subtitle, latitude: latitude, longitude: longitude)
                 }
                 else if SDWA != "NA" && SDWA != "Not Applicable" && SDWAClicked {
-                    subtitle = "No recent Non-Compliance S \(id)"
+                    subtitle = "No recent SDWA Non-Compliance ID: \(id)"
                     addMarker(title: name, subtitle: subtitle, latitude: latitude, longitude: longitude)
                 }
                 
@@ -518,42 +518,42 @@ extension MapViewController: MKMapViewDelegate {
         }
         
         if subtitleArray[0] == "High" {
-            switch subtitleArray[3] {
-            case "A":
+            switch subtitleArray[2] {
+            case "CAA":
                 annotationView?.image = UIImage(named: "CAA Red")?.scaleImage(toSize: markerSize)
-            case "W":
+            case "CWA":
                 annotationView?.image = UIImage(named: "CWA Red")?.scaleImage(toSize: markerSize)
-            case "R" :
+            case "RCRA" :
                 annotationView?.image = UIImage(named: "RCRA Red")?.scaleImage(toSize: markerSize)
-            case "S":
+            case "SDWA":
                 annotationView?.image = UIImage(named: "SDWA Red")?.scaleImage(toSize: markerSize)
             default:
                 print("None Found")
             }
         }
         else if subtitleArray[0] == "Mid" {
-            switch subtitleArray[3] {
-            case "A":
+            switch subtitleArray[2] {
+            case "CAA":
                 annotationView?.image = UIImage(named: "CAA Yellow")?.scaleImage(toSize: markerSize)
-            case "W":
+            case "CWA":
                 annotationView?.image = UIImage(named: "CWA Yellow")?.scaleImage(toSize: markerSize)
-            case "R" :
+            case "RCRA" :
                 annotationView?.image = UIImage(named: "RCRA Yellow")?.scaleImage(toSize: markerSize)
-            case "S":
+            case "SDWA":
                 annotationView?.image = UIImage(named: "SDWA Yellow")?.scaleImage(toSize: markerSize)
             default:
                 print("None Found")
             }
         }
         else if subtitleArray[0] == "No" {
-            switch subtitleArray[3] {
-            case "A":
+            switch subtitleArray[2] {
+            case "CAA":
                 annotationView?.image = UIImage(named: "CAA Green")?.scaleImage(toSize: markerSize)
-            case "W":
+            case "CWA":
                 annotationView?.image = UIImage(named: "CWA Green")?.scaleImage(toSize: markerSize)
-            case "R" :
+            case "RCRA" :
                 annotationView?.image = UIImage(named: "RCRA Green")?.scaleImage(toSize: markerSize)
-            case "S":
+            case "SDWA":
                 annotationView?.image = UIImage(named: "SDWA Green")?.scaleImage(toSize: markerSize)
             default:
                 print("None Found")
@@ -587,17 +587,17 @@ extension MapViewController: MKMapViewDelegate {
         }
         
         if subtitleArray[0] == "High" || subtitleArray[0] == "Mid" || subtitleArray[0] == "No" && subtitleArray[0] != " " {
-            facID = String(subtitleArray[4])
+            facID = String(subtitleArray[5])
             print(facID ?? "None")
             moreInfoButton.isEnabled = true
-            switch subtitleArray[3] {
-            case "A":
+            switch subtitleArray[2] {
+            case "CAA":
                 playSound(soundName: "CAA")
-            case "W":
+            case "CWA":
                 playSound(soundName: "CWA")
-            case "R" :
+            case "RCRA" :
                 playSound(soundName: "RCRA")
-            case "S":
+            case "SDWA":
                 playSound(soundName: "SDWA")
             default:
                 print("None Found")

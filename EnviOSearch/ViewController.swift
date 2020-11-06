@@ -63,7 +63,7 @@ class ViewController: UIViewController, GADInterstitialDelegate, UITextFieldDele
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         blurView.bounds = self.view.bounds
-        popupView.bounds = CGRect(x: 0, y: 0, width: self.view.bounds.width * 0.9, height: self.view.bounds.height * 0.4)
+        popupView.bounds = CGRect(x: 0, y: 0, width: self.view.bounds.width * 0.9, height: 550)
         addressView.bounds = CGRect(x: 0, y: 0, width: self.view.bounds.width * 0.9, height: self.view.bounds.height * 0.4)
         addressView.layer.cornerRadius = 10
         
@@ -84,7 +84,7 @@ class ViewController: UIViewController, GADInterstitialDelegate, UITextFieldDele
         adView.adUnitID = "ca-app-pub-6391108766292407/5443308538"
         //homeBanner ID: "ca-app-pub-6391108766292407/5443308538"
         adView.rootViewController = self
-        adView.load(GADRequest())
+        //adView.load(GADRequest())
         
         
         
@@ -214,6 +214,10 @@ class ViewController: UIViewController, GADInterstitialDelegate, UITextFieldDele
     }
     
     
+    @IBAction func questionButtonPressed(_ sender: Any) {
+        animateIn(desiredView: blurView)
+        animateIn(desiredView: popupView)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
