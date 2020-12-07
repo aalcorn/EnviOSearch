@@ -69,9 +69,6 @@ class MapViewController: UIViewController {
         configureLocationServices()
         locationManager.startUpdatingLocation()
         
-        //Zoom to user's current location based on search radius
-        
-        
         //Button appears and sends user to relevant facility page when clicked
         moreInfoButton.isEnabled = false
         
@@ -248,11 +245,9 @@ class MapViewController: UIViewController {
         let span = MKCoordinateSpan(latitudeDelta: 55, longitudeDelta: 20)
         let zoomRegion = MKCoordinateRegion(center: usa, span: span)
         mMap.setRegion(zoomRegion, animated: true)
-        //mMap.setRegion(MKCoordinateRegion., animated: <#T##Bool#>)
     }
     
     private func getCleanUpJSON() {
-        //TODO: Maybe add feature to zoom out here?
         let cleanUpURL = "http://69.92.212.5/"
         guard let url = URL(string: cleanUpURL
             ) else {
