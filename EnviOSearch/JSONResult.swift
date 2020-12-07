@@ -61,3 +61,26 @@ struct Permits: Decodable {
     let FacilityState: String
     let FacilityZip: String
 }
+
+//Clean-up sites
+struct CleanUpResultSet: Decodable {
+    let data: [data]
+}
+
+//struct data: Decodable {
+//    let info: [info]
+//}
+
+struct data: Decodable {
+    let id: String
+    let epaId: String
+    let name: String
+    let address: String
+    let city: String
+    let state: String
+    let zip: String
+    let congressDistrict: String
+    let countyName: String
+    let lat: String
+    let long: String
+}

@@ -59,6 +59,8 @@ class ViewController: UIViewController, GADInterstitialDelegate, UITextFieldDele
     
     var audioPlayer: AVAudioPlayer?
     
+    var csvURL: URL?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -86,8 +88,6 @@ class ViewController: UIViewController, GADInterstitialDelegate, UITextFieldDele
         adView.rootViewController = self
         //adView.load(GADRequest())
         
-        
-        
         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
         if launchedBefore {
             print("Not first launch")
@@ -107,6 +107,7 @@ class ViewController: UIViewController, GADInterstitialDelegate, UITextFieldDele
             //Play intro sound
             print("Just opened")
             playSound(soundName: "Intro")
+            //downloadSuperFunds()
         }
         else {
             print("NOT Just opened!")
@@ -312,6 +313,86 @@ class ViewController: UIViewController, GADInterstitialDelegate, UITextFieldDele
         return false
     }
     
+    func downloadSuperFunds() {
+        guard let url = URL(string: "https://data.epa.gov/efservice/SEMS_ACTIVE_SITES/ROWS/3745:13750/EXCEL") else {
+            print("Nope")
+            return
+        }
+        let urlSession = URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue())
+        let downloadTask = urlSession.downloadTask(with: url)
+        downloadTask.resume()
+    }
+    
+    func parseData() {
+        print("Beginning parse...")
+        var readString = ""
+        do {
+            readString = try String(contentsOf: csvURL!)
+        } catch let error as NSError {
+            print("Failed to read file")
+            print(error)
+        }
+            
+        let rowArray = readString.split(separator: "\n")
+        
+        var dataArray = [[String]]()
+        for i in 1..<rowArray.count {
+            var tempArray = (rowArray[i].replacingOccurrences(of: "\"\"", with: "\"Empty\"").replacingOccurrences(of: "\",\"", with:"|").components(separatedBy: "|"))
+            
+            //print("Temp Arr: \(tempArray[12])")
+            
+            //print(dataArray[i-1][1])
+            
+            if (tempArray[12] != "Empty") {
+                //Add data to array
+                dataArray.append(tempArray)
+            }
+            else {
+                //Try to geolocate
+                //create address string from data
+                let streetAddress = tempArray[4]
+                let city = tempArray[6]
+                let state = tempArray[7]
+                let zip = tempArray[8]
+                //let addressString = "\(streetAddress) \(city) \(state) \(zip)"
+                let addressString = "\(zip)"
+                
+                
+                let geocoder = CLGeocoder()
+                geocoder.geocodeAddressString(addressString) {
+                    placemarks, error in
+                    let placemark = placemarks?.first
+                    let latitude = Double(placemark?.location?.coordinate.latitude ?? 0)
+                    let longitude = Double(placemark?.location?.coordinate.longitude ?? 0)
+                    
+                    //print("Lat: \(latitude), Long: \(longitude)")
+                    
+                    if (latitude != 0) {
+                        //Add too dataArray
+                        tempArray[12] = String(latitude)
+                        tempArray[13] = String(longitude)
+                        dataArray.append(tempArray)
+                        print("Lat: \(latitude), Long: \(longitude)")
+                        print(dataArray.count)
+                    }
+                    else {
+                        //print(addressString)
+                    }
+                }
+            
+            }
+            
+            
+            
+        }
+        
+        UserDefaults.standard.set(dataArray, forKey: "dataArray")
+        print(dataArray.count)
+        
+        
+    }
+    
+    
 }
 
 extension ViewController: CLLocationManagerDelegate {
@@ -333,4 +414,30 @@ extension ViewController: GADBannerViewDelegate {
     func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
         print(error)
     }
+}
+
+extension ViewController : URLSessionDownloadDelegate {
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        //print("File Downloaded Location - ", location)
+    
+    
+    guard let url = downloadTask.originalRequest?.url else {
+        return
+    }
+    
+    let docsPath = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+        let destinationPath = docsPath.appendingPathComponent(url.lastPathComponent)
+        
+        try? FileManager.default.removeItem(at: destinationPath)
+        print("File Downloaded Location - ", location)
+        do{
+            try FileManager.default.copyItem(at: location, to: destinationPath)
+            self.csvURL = destinationPath
+            
+        }catch let error {
+            print("Copy Error: \(error.localizedDescription)")
+        }
+        parseData()
+    }
+    
 }

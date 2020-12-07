@@ -282,7 +282,7 @@ class FacViewController: UIViewController {
             case 7...12:
                 QtrsWithNCLabel.textColor = UIColor.red
             default:
-                QtrsWithNCLabel.textColor = UIColor.black
+                QtrsWithNCLabel.textColor = .none
             }
             
             switch QtrsInSNC {
@@ -291,7 +291,7 @@ class FacViewController: UIViewController {
             case 7...12:
                 QtrsWithSigNCLabel.textColor = UIColor.red
             default:
-                QtrsWithSigNCLabel.textColor = UIColor.black
+                QtrsWithSigNCLabel.textColor = .none
             }
             
         }

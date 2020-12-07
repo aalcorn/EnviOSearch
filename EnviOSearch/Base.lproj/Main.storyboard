@@ -60,6 +60,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CAA Facilities:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lrM-yp-mHB">
+                                <rect key="frame" x="16.000000000000007" y="412" width="108.66666666666669" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h26-nj-fNj" userLabel="CAASwitch">
                                 <rect key="frame" x="345" y="407" width="51" height="31"/>
                             </switch>
@@ -136,7 +142,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5uJ-gf-Aru">
-                                <rect key="frame" x="16" y="17" width="35" height="36.999999999999986"/>
+                                <rect key="frame" x="189.66666666666666" y="183.33333333333334" width="35" height="37.000000000000014"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="H9h-HW-HGG"/>
                                     <constraint firstAttribute="height" constant="38.329999999999998" id="gRa-08-LDi"/>
@@ -148,12 +154,6 @@
                                     <action selector="questionButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oeF-cu-xqU"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CAA Facilities:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lrM-yp-mHB">
-                                <rect key="frame" x="16.000000000000007" y="412" width="108.66666666666669" height="20.333333333333314"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -162,12 +162,11 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PeA-a6-C9z" secondAttribute="trailing" constant="32" id="1rd-3X-gV3"/>
                             <constraint firstItem="l9F-2e-Ddr" firstAttribute="top" secondItem="2CL-9N-flw" secondAttribute="bottom" constant="5" id="69F-PH-9Ph"/>
                             <constraint firstItem="l9F-2e-Ddr" firstAttribute="leading" secondItem="h26-nj-fNj" secondAttribute="leading" id="7Mx-Le-JBi"/>
+                            <constraint firstItem="5uJ-gf-Aru" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8kE-Ee-Y4R"/>
                             <constraint firstItem="0UZ-zc-bgJ" firstAttribute="top" secondItem="msh-NE-vaq" secondAttribute="bottom" constant="4" id="8md-ic-ltO"/>
                             <constraint firstItem="l9F-2e-Ddr" firstAttribute="leading" secondItem="EAA-Oy-ZIW" secondAttribute="leading" id="Bfu-CE-q8D"/>
                             <constraint firstItem="msh-NE-vaq" firstAttribute="top" secondItem="Eaq-wU-bH4" secondAttribute="bottom" constant="8" id="Fr0-p7-ec6"/>
-                            <constraint firstItem="5uJ-gf-Aru" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="H8k-OE-SXe"/>
                             <constraint firstItem="PeA-a6-C9z" firstAttribute="top" secondItem="vTm-Wb-pA7" secondAttribute="bottom" constant="32" id="Hh0-jv-01c"/>
-                            <constraint firstItem="5uJ-gf-Aru" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="I7Z-at-GPX"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0UZ-zc-bgJ" secondAttribute="trailing" id="IKm-df-wSr"/>
                             <constraint firstItem="lrM-yp-mHB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="J4o-YZ-9WB"/>
                             <constraint firstItem="oKP-L7-YC1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="NKU-9H-OuO"/>
@@ -193,6 +192,7 @@
                             <constraint firstItem="9Sc-ND-NtX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rVf-Oc-zdU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9Sc-ND-NtX" secondAttribute="bottom" id="sdD-EL-nQe"/>
                             <constraint firstItem="l9F-2e-Ddr" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="uNp-QU-0kA"/>
+                            <constraint firstItem="5uJ-gf-Aru" firstAttribute="top" secondItem="oKP-L7-YC1" secondAttribute="bottom" constant="8" id="uSo-y3-P9w"/>
                             <constraint firstItem="L7I-Wg-s1J" firstAttribute="top" secondItem="klh-zD-rYR" secondAttribute="bottom" constant="16" id="wZ8-ws-evr"/>
                             <constraint firstItem="nU0-Ts-bXF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="wpt-Ny-fTu"/>
                             <constraint firstItem="vTm-Wb-pA7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="zBF-4b-HsO"/>
@@ -236,7 +236,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hNl-eX-B2t">
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hNl-eX-B2t">
                             <rect key="frame" x="0.0" y="503" width="337" height="30"/>
                             <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" title="Okay">
@@ -246,14 +246,14 @@
                                 <action selector="okayClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U3O-aP-gG6"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QZJ-3m-tmS">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QZJ-3m-tmS">
                             <rect key="frame" x="8" y="48.333333333333343" width="321" height="429.66666666666663"/>
-                            <mutableString key="text">EnviroSearch allows you to easily access publically available data about EPA non-compliant sites around you on the go. 
+                            <string key="text">EnviroSearch allows you to easily access publically available data about EPA non-compliant sites around you on the go. 
 We offer 4 EPA satutes to search by: CAA, CWA, RCRA, and SDWA (For more information about these statutes, tap the "More Info" button on the main page). 
 To conduct a search, select your search radius, then choose your search type. "Address" Will allow you to enter an address to center the search on. "Custom" will allow you to drag a marker to a location you'd like to search. "Current Location" will simply use your current location as the center of the search.
 In addition, EnviroSearch will give your area an EnviroScore. This score comes from an average of non-compliant quarters across the US, fine tuned for your area's radius. 
 Once you select a facility on the map, it's name, type, and level of recent non-compliance will be displayed.
-For more information about a specific facility, tap the "More info" button with a facility selected.</mutableString>
+For more information about a specific facility, tap the "More info" button with a facility selected.</string>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -263,6 +263,7 @@ For more information about a specific facility, tap the "More info" button with 
                     <constraints>
                         <constraint firstItem="hNl-eX-B2t" firstAttribute="leading" secondItem="SGj-DZ-c72" secondAttribute="leading" id="CW1-em-GTs"/>
                         <constraint firstItem="QZJ-3m-tmS" firstAttribute="top" secondItem="TWv-Hj-CWL" secondAttribute="bottom" constant="8" id="EPj-96-Z2e"/>
+                        <constraint firstItem="hNl-eX-B2t" firstAttribute="top" secondItem="QZJ-3m-tmS" secondAttribute="bottom" constant="25" id="JzC-Pe-j3A"/>
                         <constraint firstItem="SGj-DZ-c72" firstAttribute="trailing" secondItem="hNl-eX-B2t" secondAttribute="trailing" id="KNx-NO-i19"/>
                         <constraint firstItem="QZJ-3m-tmS" firstAttribute="leading" secondItem="SGj-DZ-c72" secondAttribute="leading" constant="8" id="KPK-f8-ez6"/>
                         <constraint firstItem="SGj-DZ-c72" firstAttribute="trailing" secondItem="QZJ-3m-tmS" secondAttribute="trailing" constant="8" id="Q8U-1P-PLk"/>
@@ -353,7 +354,6 @@ For more information about a specific facility, tap the "More info" button with 
                                         <state key="normal" title="More Info"/>
                                         <connections>
                                             <action selector="moreInfoClicked:" destination="cpC-Bb-cVk" eventType="touchUpInside" id="ZVb-Po-fBX"/>
-                                            <segue destination="VJs-0S-K2l" kind="presentation" identifier="facSegue" id="8zq-75-hOz"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fVs-zq-hf6">
@@ -372,16 +372,6 @@ For more information about a specific facility, tap the "More info" button with 
                                     <constraint firstAttribute="width" constant="100" id="xrN-xd-bFi"/>
                                 </constraints>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q74-Bg-AsV">
-                                <rect key="frame" x="8" y="702" width="398" height="30"/>
-                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Choose New Location">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="locationButtonClicked:" destination="cpC-Bb-cVk" eventType="touchUpInside" id="37Z-E1-gRZ"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending area ranking" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMt-pc-i3B">
                                 <rect key="frame" x="8" y="638" width="200" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -423,12 +413,37 @@ For more information about a specific facility, tap the "More info" button with 
                                     <constraint firstAttribute="height" constant="33.329999999999998" id="iAw-nD-V6j"/>
                                 </constraints>
                             </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OJS-va-Cqu">
+                                <rect key="frame" x="8" y="702" width="398" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q74-Bg-AsV">
+                                        <rect key="frame" x="0.0" y="0.0" width="195" height="30"/>
+                                        <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Choose New Location">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="locationButtonClicked:" destination="cpC-Bb-cVk" eventType="touchUpInside" id="37Z-E1-gRZ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lFx-8n-JX5">
+                                        <rect key="frame" x="203" y="0.0" width="195" height="30"/>
+                                        <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Cleanup Site Search">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cleanUpButtonClicked:" destination="cpC-Bb-cVk" eventType="touchUpInside" id="cet-N9-QaU"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="4ot-Hf-kGK" firstAttribute="top" secondItem="l3j-NM-Vhu" secondAttribute="bottom" constant="5" id="06g-Ew-OGR"/>
                             <constraint firstItem="eNx-DU-0E6" firstAttribute="top" secondItem="l3j-NM-Vhu" secondAttribute="bottom" constant="5" id="3P9-bT-hRO"/>
-                            <constraint firstItem="Q74-Bg-AsV" firstAttribute="leading" secondItem="3UR-cq-iHO" secondAttribute="leading" constant="8" id="4Nj-D5-3HX"/>
+                            <constraint firstItem="OJS-va-Cqu" firstAttribute="leading" secondItem="3UR-cq-iHO" secondAttribute="leading" constant="8" id="4bR-DT-58y"/>
                             <constraint firstItem="3UR-cq-iHO" firstAttribute="trailing" secondItem="0TT-d5-mL7" secondAttribute="trailing" constant="8" id="6RN-Um-isL"/>
                             <constraint firstItem="4ot-Hf-kGK" firstAttribute="leading" secondItem="fOo-4u-nQV" secondAttribute="trailing" constant="5" id="Bdf-OK-AXp"/>
                             <constraint firstItem="bMt-pc-i3B" firstAttribute="top" secondItem="l3j-NM-Vhu" secondAttribute="bottom" constant="16" id="ENo-jB-I1E"/>
@@ -439,25 +454,26 @@ For more information about a specific facility, tap the "More info" button with 
                             <constraint firstItem="fOo-4u-nQV" firstAttribute="leading" secondItem="bMt-pc-i3B" secondAttribute="trailing" constant="8" id="Ok9-sj-1x0"/>
                             <constraint firstItem="eNx-DU-0E6" firstAttribute="leading" secondItem="9Yq-ea-dZd" secondAttribute="trailing" constant="5" id="QMi-Ex-QRf"/>
                             <constraint firstItem="l3j-NM-Vhu" firstAttribute="leading" secondItem="sr7-wV-T4T" secondAttribute="leading" id="RaP-g9-Lj3"/>
-                            <constraint firstItem="3UR-cq-iHO" firstAttribute="bottom" secondItem="Q74-Bg-AsV" secondAttribute="bottom" constant="4" id="XIC-b6-PTz"/>
+                            <constraint firstItem="OJS-va-Cqu" firstAttribute="top" secondItem="kT6-Qv-Xz0" secondAttribute="bottom" constant="8" id="dMX-IL-gat"/>
                             <constraint firstItem="kT6-Qv-Xz0" firstAttribute="top" secondItem="bMt-pc-i3B" secondAttribute="bottom" constant="8" id="dPd-YN-alC"/>
-                            <constraint firstItem="3UR-cq-iHO" firstAttribute="trailing" secondItem="Q74-Bg-AsV" secondAttribute="trailing" constant="8" id="dfW-e4-XRp"/>
                             <constraint firstItem="3UR-cq-iHO" firstAttribute="trailing" secondItem="kT6-Qv-Xz0" secondAttribute="trailing" constant="8" id="dnJ-1h-hNj"/>
                             <constraint firstItem="3k9-WL-xYT" firstAttribute="trailing" secondItem="3UR-cq-iHO" secondAttribute="trailing" id="fy4-jc-bc1"/>
                             <constraint firstItem="9Yq-ea-dZd" firstAttribute="leading" secondItem="4ot-Hf-kGK" secondAttribute="trailing" constant="5" id="hE3-zP-09W"/>
+                            <constraint firstItem="3UR-cq-iHO" firstAttribute="trailing" secondItem="OJS-va-Cqu" secondAttribute="trailing" constant="8" id="hfa-Qa-Sm4"/>
                             <constraint firstItem="l3j-NM-Vhu" firstAttribute="top" secondItem="sr7-wV-T4T" secondAttribute="top" id="nbL-3I-R2c"/>
                             <constraint firstItem="kE7-Jf-06D" firstAttribute="centerX" secondItem="sr7-wV-T4T" secondAttribute="centerX" id="pU8-td-k4u"/>
                             <constraint firstItem="kE7-Jf-06D" firstAttribute="top" secondItem="3k9-WL-xYT" secondAttribute="bottom" constant="8" id="q4O-4V-icz"/>
+                            <constraint firstItem="3UR-cq-iHO" firstAttribute="bottom" secondItem="OJS-va-Cqu" secondAttribute="bottom" constant="4" id="rX3-vw-wgx"/>
                             <constraint firstItem="3k9-WL-xYT" firstAttribute="leading" secondItem="3UR-cq-iHO" secondAttribute="leading" id="snO-Uh-paB"/>
                             <constraint firstItem="0TT-d5-mL7" firstAttribute="top" secondItem="l3j-NM-Vhu" secondAttribute="bottom" constant="5" id="tE4-wr-YCE"/>
                             <constraint firstItem="kT6-Qv-Xz0" firstAttribute="leading" secondItem="3UR-cq-iHO" secondAttribute="leading" constant="8" id="tki-J8-GjS"/>
-                            <constraint firstItem="Q74-Bg-AsV" firstAttribute="top" secondItem="kT6-Qv-Xz0" secondAttribute="bottom" constant="8" id="vDa-aE-PNg"/>
                             <constraint firstItem="3k9-WL-xYT" firstAttribute="top" secondItem="3UR-cq-iHO" secondAttribute="top" id="voe-G5-q70"/>
                             <constraint firstItem="fOo-4u-nQV" firstAttribute="top" secondItem="l3j-NM-Vhu" secondAttribute="bottom" constant="5" id="zaZ-LS-JbS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3UR-cq-iHO"/>
                     </view>
                     <connections>
+                        <outlet property="cleanUpButton" destination="lFx-8n-JX5" id="10m-sc-hBl"/>
                         <outlet property="enviroScoreLabel" destination="bMt-pc-i3B" id="S02-b4-nPr"/>
                         <outlet property="legendImage" destination="3k9-WL-xYT" id="vKm-t7-2Sh"/>
                         <outlet property="legendLabel" destination="fVs-zq-hf6" id="YVy-Xk-dOo"/>
@@ -470,11 +486,12 @@ For more information about a specific facility, tap the "More info" button with 
                         <outlet property="star3" destination="9Yq-ea-dZd" id="4Ml-pf-VDr"/>
                         <outlet property="star4" destination="eNx-DU-0E6" id="1T4-Rb-hsl"/>
                         <outlet property="star5" destination="0TT-d5-mL7" id="0iU-V8-hSx"/>
+                        <segue destination="VJs-0S-K2l" kind="presentation" identifier="facSegue" id="ONX-KG-zOK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jee-1b-X0d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="940.57971014492762" y="117.39130434782609"/>
+            <point key="canvasLocation" x="952" y="118"/>
         </scene>
         <!--Fac View Controller-->
         <scene sceneID="HVy-ad-2Nq">

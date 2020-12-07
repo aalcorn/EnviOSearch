@@ -139,8 +139,8 @@
 				8FF97A4924BF5BCA00D43786 /* EnviOSearchTests */,
 				8FF97A5424BF5BCA00D43786 /* EnviOSearchUITests */,
 				8FF97A3124BF5BC900D43786 /* Products */,
-				3AC2B5C4FEDFC2749EB9B04B /* Pods */,
 				4D8A4794838A1A35F8AB0726 /* Frameworks */,
+				3AC2B5C4FEDFC2749EB9B04B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -627,7 +627,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 8.0;
+				MARKETING_VERSION = 10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = hgs.EnviOSearch;
 				PRODUCT_NAME = EnviroSearch;
 				PROVISIONING_PROFILE_SPECIFIER = "EnviroSearch App Store";
@@ -649,7 +649,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 8.0;
+				MARKETING_VERSION = 10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = hgs.EnviOSearch;
 				PRODUCT_NAME = EnviroSearch;
 				PROVISIONING_PROFILE_SPECIFIER = "";

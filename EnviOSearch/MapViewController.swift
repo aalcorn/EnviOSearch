@@ -19,6 +19,7 @@ class MapViewController: UIViewController {
     
     @IBOutlet weak var mMap: MKMapView!
     @IBOutlet weak var moreInfoButton: UIButton!
+    @IBOutlet weak var cleanUpButton: UIButton!
     
     @IBOutlet weak var enviroScoreLabel: UILabel!
     @IBOutlet weak var locationButton: UIButton!
@@ -32,6 +33,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var star4: UIImageView!
     @IBOutlet weak var star5: UIImageView!
     
+    var cleanUpSelected = false
     
     
     let markerSize = CGSize(width: 20, height: 20)
@@ -126,7 +128,17 @@ class MapViewController: UIViewController {
     }
     
     @IBAction func moreInfoClicked(_ sender: Any) {
-        performSegue(withIdentifier: "facSegue", sender: self)
+        if(cleanUpSelected) {
+            let superFundString = "https://cumulis.epa.gov/supercpad/cursites/csitinfo.cfm?id=\(facID!)"
+            print(superFundString)
+            let url = URL (string: superFundString)!
+            UIApplication.shared.open(url)
+        }
+        else {
+            performSegue(withIdentifier: "facSegue", sender: self)
+        }
+        
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -199,6 +211,23 @@ class MapViewController: UIViewController {
         
     }
 
+    @IBAction func cleanUpButtonClicked(_ sender: Any) {
+        enviroScoreLabel.text = " "
+        mMap.removeAnnotations(mMap.annotations)
+        mMap.showsUserLocation = true
+        
+        self.star1.image = UIImage(systemName: "star")
+        self.star2.image = UIImage(systemName: "star")
+        self.star3.image = UIImage(systemName: "star")
+        self.star4.image = UIImage(systemName: "star")
+        self.star5.image = UIImage(systemName: "star")
+        
+        disableButton()
+        zoomOut()
+        getCleanUpJSON()
+        
+        
+    }
     
     private func configureLocationServices() {
         locationManager.delegate = self
@@ -212,6 +241,74 @@ class MapViewController: UIViewController {
         let zoomMeters = mileMeters * radius
         let zoomRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: CLLocationDistance(zoomMeters), longitudinalMeters: CLLocationDistance(zoomMeters))
         mMap.setRegion(zoomRegion, animated: true)
+    }
+    
+    private func zoomOut() {
+        let usa = CLLocationCoordinate2D(latitude: 40, longitude: -98.5)
+        let span = MKCoordinateSpan(latitudeDelta: 55, longitudeDelta: 20)
+        let zoomRegion = MKCoordinateRegion(center: usa, span: span)
+        mMap.setRegion(zoomRegion, animated: true)
+        //mMap.setRegion(MKCoordinateRegion., animated: <#T##Bool#>)
+    }
+    
+    private func getCleanUpJSON() {
+        //TODO: Maybe add feature to zoom out here?
+        let cleanUpURL = "http://69.92.212.5/"
+        guard let url = URL(string: cleanUpURL
+            ) else {
+            print("ERROR")
+                DispatchQueue.main.async {
+                    self.loadWheel.isHidden = true
+                    self.showToast(message: "Connection Error!")
+                    self.enableButton()
+                    self.ableToSearch = false
+                }
+                return
+            }
+        let session = URLSession.shared
+        let task = session.dataTask(with: url) { (data, _, _) in
+            guard let data = data else {
+                print("DATA ERROR")
+                DispatchQueue.main.async {
+                    self.loadWheel.isHidden = true
+                    self.showToast(message: "Connection Error!")
+                    self.enableButton()
+                    self.ableToSearch = false
+                }
+                return
+            }
+            do {
+                let resultSet = try JSONDecoder().decode(CleanUpResultSet.self, from: data)
+                
+                var dataList = resultSet.data
+                dataList.remove(at: 0)
+                var count = 0
+                for data in dataList {
+                    let subtitleString = "Site: ID: \(data.id) \(data.address) \(data.city) \(data.state) \(data.zip)"
+                    let datalat = Double(data.lat)
+                    let datalong = Double(data.long)
+                    self.addMarker(title: data.name, subtitle: subtitleString, latitude: datalat ?? 0, longitude: datalong ?? 0)
+                    print(data.state)
+                    count += 1
+                }
+                print(count)
+                
+                DispatchQueue.main.async {
+                    self.loadWheel.isHidden = true
+                    self.showToast(message: "Finished")
+                    self.enableButton()
+                    self.ableToSearch = false
+                }
+                
+                
+            } catch let Jerr {
+                print(Jerr)
+            }
+        }
+        task.resume()
+            
+        
+        
     }
 
     //Gets JSON data for facilities in the radius specified
@@ -232,7 +329,7 @@ class MapViewController: UIViewController {
                     self.ableToSearch = false
                 }
                 return
-        }
+            }
         
         let session = URLSession.shared
         let task = session.dataTask(with: url) { (data, _, _) in
@@ -365,10 +462,10 @@ class MapViewController: UIViewController {
         
     }
 
+    
     //Uses the facility's compliance status and type to decide which icon to use, then adds a marker to the map
     private func addFacilityToMap(CAA: String, CWA: String, SDWA: String, RCRA: String, id: String, name: String, latitude: Double, longitude: Double, NCQtrs: Int) {
         var subtitle = ""
-        
         //A catagory: CAA, W catagory: CWA, S catagory: SDWA, R catagory: RCRA
         if NCQtrs != -1 {
             if NCQtrs >= 7 {
@@ -479,11 +576,15 @@ class MapViewController: UIViewController {
     }
     
     func enableButton() {
+        cleanUpButton.isEnabled = true
+        cleanUpButton.alpha = 1.0
         locationButton.isEnabled = true
         locationButton.alpha = 1.0
     }
     
     func disableButton() {
+        cleanUpButton.isEnabled = false
+        cleanUpButton.alpha = 0.6
         locationButton.isEnabled = false
         locationButton.alpha = 0.6
     }
@@ -567,6 +668,10 @@ extension MapViewController: MKMapViewDelegate {
             annotationView?.image = UIImage(named: "EnviroLogo")?.scaleImage(toSize: markerSize)
             annotationView?.isDraggable = false
         }
+        else if subtitleArray[0] == "Site:"{
+            annotationView?.image = UIImage(named: "cleanUpIcon")?.scaleImage(toSize: markerSize)
+            annotationView?.clusteringIdentifier = "cleanUp"
+        }
         else {
             return nil
         }
@@ -575,6 +680,7 @@ extension MapViewController: MKMapViewDelegate {
         
         return annotationView
     }
+
     
     //When annotation is selected, play corresponding sound and show the more info button
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
@@ -593,15 +699,25 @@ extension MapViewController: MKMapViewDelegate {
             switch subtitleArray[2] {
             case "CAA":
                 playSound(soundName: "CAA")
+                cleanUpSelected = false
             case "CWA":
                 playSound(soundName: "CWA")
+                cleanUpSelected = false
             case "RCRA" :
                 playSound(soundName: "RCRA")
+                cleanUpSelected = false
             case "SDWA":
                 playSound(soundName: "SDWA")
+                cleanUpSelected = false
             default:
                 print("None Found")
             }
+        }
+        else if subtitleArray[0] == "Site:" {
+            facID = String(subtitleArray[2])
+            print(facID)
+            cleanUpSelected = true
+            moreInfoButton.isEnabled = true
         }
         else {
             facID = nil
@@ -612,7 +728,6 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         print("Unselected")
         moreInfoButton.isEnabled = false
-        facID = nil
     }
 }
 
