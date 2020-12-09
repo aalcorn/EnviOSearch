@@ -413,12 +413,13 @@ For more information about a specific facility, tap the "More info" button with 
                                     <constraint firstAttribute="height" constant="33.329999999999998" id="iAw-nD-V6j"/>
                                 </constraints>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OJS-va-Cqu">
-                                <rect key="frame" x="8" y="702" width="398" height="30"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="OJS-va-Cqu">
+                                <rect key="frame" x="4" y="702" width="406" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q74-Bg-AsV">
-                                        <rect key="frame" x="0.0" y="0.0" width="195" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="201" height="30"/>
                                         <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="Choose New Location">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -427,7 +428,7 @@ For more information about a specific facility, tap the "More info" button with 
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lFx-8n-JX5">
-                                        <rect key="frame" x="203" y="0.0" width="195" height="30"/>
+                                        <rect key="frame" x="205" y="0.0" width="201" height="30"/>
                                         <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Cleanup Site Search">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -443,7 +444,7 @@ For more information about a specific facility, tap the "More info" button with 
                         <constraints>
                             <constraint firstItem="4ot-Hf-kGK" firstAttribute="top" secondItem="l3j-NM-Vhu" secondAttribute="bottom" constant="5" id="06g-Ew-OGR"/>
                             <constraint firstItem="eNx-DU-0E6" firstAttribute="top" secondItem="l3j-NM-Vhu" secondAttribute="bottom" constant="5" id="3P9-bT-hRO"/>
-                            <constraint firstItem="OJS-va-Cqu" firstAttribute="leading" secondItem="3UR-cq-iHO" secondAttribute="leading" constant="8" id="4bR-DT-58y"/>
+                            <constraint firstItem="OJS-va-Cqu" firstAttribute="leading" secondItem="3UR-cq-iHO" secondAttribute="leading" constant="4" id="4bR-DT-58y"/>
                             <constraint firstItem="3UR-cq-iHO" firstAttribute="trailing" secondItem="0TT-d5-mL7" secondAttribute="trailing" constant="8" id="6RN-Um-isL"/>
                             <constraint firstItem="4ot-Hf-kGK" firstAttribute="leading" secondItem="fOo-4u-nQV" secondAttribute="trailing" constant="5" id="Bdf-OK-AXp"/>
                             <constraint firstItem="bMt-pc-i3B" firstAttribute="top" secondItem="l3j-NM-Vhu" secondAttribute="bottom" constant="16" id="ENo-jB-I1E"/>
@@ -459,7 +460,7 @@ For more information about a specific facility, tap the "More info" button with 
                             <constraint firstItem="3UR-cq-iHO" firstAttribute="trailing" secondItem="kT6-Qv-Xz0" secondAttribute="trailing" constant="8" id="dnJ-1h-hNj"/>
                             <constraint firstItem="3k9-WL-xYT" firstAttribute="trailing" secondItem="3UR-cq-iHO" secondAttribute="trailing" id="fy4-jc-bc1"/>
                             <constraint firstItem="9Yq-ea-dZd" firstAttribute="leading" secondItem="4ot-Hf-kGK" secondAttribute="trailing" constant="5" id="hE3-zP-09W"/>
-                            <constraint firstItem="3UR-cq-iHO" firstAttribute="trailing" secondItem="OJS-va-Cqu" secondAttribute="trailing" constant="8" id="hfa-Qa-Sm4"/>
+                            <constraint firstItem="3UR-cq-iHO" firstAttribute="trailing" secondItem="OJS-va-Cqu" secondAttribute="trailing" constant="4" id="hfa-Qa-Sm4"/>
                             <constraint firstItem="l3j-NM-Vhu" firstAttribute="top" secondItem="sr7-wV-T4T" secondAttribute="top" id="nbL-3I-R2c"/>
                             <constraint firstItem="kE7-Jf-06D" firstAttribute="centerX" secondItem="sr7-wV-T4T" secondAttribute="centerX" id="pU8-td-k4u"/>
                             <constraint firstItem="kE7-Jf-06D" firstAttribute="top" secondItem="3k9-WL-xYT" secondAttribute="bottom" constant="8" id="q4O-4V-icz"/>
@@ -1066,10 +1067,10 @@ For more information about a specific facility, tap the "More info" button with 
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="FMi-t5-A3a"/>
+        <segue reference="Z0Q-rS-vuT"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="legend" width="988" height="359"/>
+        <image name="legend" width="615" height="258"/>
         <image name="questionmark.circle.fill" catalog="system" width="128" height="121"/>
         <image name="star" catalog="system" width="128" height="116"/>
     </resources>

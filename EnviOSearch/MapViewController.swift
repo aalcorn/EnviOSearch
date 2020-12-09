@@ -63,6 +63,11 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        print(CAAClicked)
+        print(CWAClicked)
+        print(SDWAClicked)
+        print(RCRAClicked)
+        print(onlyNC)
         
         mMap.delegate = self
         
@@ -127,7 +132,6 @@ class MapViewController: UIViewController {
     @IBAction func moreInfoClicked(_ sender: Any) {
         if(cleanUpSelected) {
             let superFundString = "https://cumulis.epa.gov/supercpad/cursites/csitinfo.cfm?id=\(facID!)"
-            print(superFundString)
             let url = URL (string: superFundString)!
             UIApplication.shared.open(url)
         }
@@ -645,12 +649,16 @@ extension MapViewController: MKMapViewDelegate {
             switch subtitleArray[2] {
             case "CAA":
                 annotationView?.image = UIImage(named: "CAA Green")?.scaleImage(toSize: markerSize)
+                annotationView?.clusteringIdentifier = "green"
             case "CWA":
                 annotationView?.image = UIImage(named: "CWA Green")?.scaleImage(toSize: markerSize)
+                annotationView?.clusteringIdentifier = "green"
             case "RCRA" :
                 annotationView?.image = UIImage(named: "RCRA Green")?.scaleImage(toSize: markerSize)
+                annotationView?.clusteringIdentifier = "green"
             case "SDWA":
                 annotationView?.image = UIImage(named: "SDWA Green")?.scaleImage(toSize: markerSize)
+                annotationView?.clusteringIdentifier = "green"
             default:
                 print("None Found")
             }

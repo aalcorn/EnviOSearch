@@ -223,6 +223,7 @@ class ViewController: UIViewController, GADInterstitialDelegate, UITextFieldDele
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "toMapSegue" :
+            print("toMap")
             let vc = segue.destination as! MapViewController
             vc.radius = self.radius
             vc.CAAClicked = self.CAAClicked
@@ -235,13 +236,14 @@ class ViewController: UIViewController, GADInterstitialDelegate, UITextFieldDele
             vc.searchType = self.searchType
             
         case "customMapSegue" :
+            print("Custom")
             let vc = segue.destination as! MapViewController
             vc.radius = self.radius
-            vc.CAAClicked = self.CAAClicked
-            vc.CWAClicked = self.CWAClicked
-            vc.RCRAClicked = self.RCRAClicked
-            vc.SDWAClicked = self.SDWAClicked
-            vc.onlyNC = self.onlyNC
+            vc.CAAClicked = self.CAASwitch.isOn
+            vc.CWAClicked = self.CWASwitch.isOn
+            vc.RCRAClicked = self.RCRASwitch.isOn
+            vc.SDWAClicked = self.SDWASwitch.isOn
+            vc.onlyNC = self.onlyNCSwitch.isOn
             vc.lat = currentLocation?.latitude ?? 25
             vc.lon = currentLocation?.longitude ?? 25
             vc.searchType = "customLocation"

@@ -621,13 +621,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Distribution: HGS Engineering, Inc. (Y77Z9W2Q27)";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2.0;
 				DEVELOPMENT_TEAM = Y77Z9W2Q27;
 				INFOPLIST_FILE = EnviOSearch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 10.0;
+				MARKETING_VERSION = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = hgs.EnviOSearch;
 				PRODUCT_NAME = EnviroSearch;
 				PROVISIONING_PROFILE_SPECIFIER = "EnviroSearch App Store";
@@ -643,13 +644,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2.0;
 				DEVELOPMENT_TEAM = Y77Z9W2Q27;
 				INFOPLIST_FILE = EnviOSearch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 10.0;
+				MARKETING_VERSION = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = hgs.EnviOSearch;
 				PRODUCT_NAME = EnviroSearch;
 				PROVISIONING_PROFILE_SPECIFIER = "";
