@@ -223,6 +223,8 @@ class MapViewController: UIViewController {
         self.star4.image = UIImage(systemName: "star")
         self.star5.image = UIImage(systemName: "star")
         
+        loadWheel.isHidden = false
+        
         disableButton()
         zoomOut()
         getCleanUpJSON()
